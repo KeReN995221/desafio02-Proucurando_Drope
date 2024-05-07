@@ -1,4 +1,4 @@
-package com.desafio02.alunos_matriculas.entidades;
+package com.desafio02.alunos_matriculas.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
