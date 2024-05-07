@@ -1,4 +1,4 @@
-package com.desafio02.cursos.entidades;
+package com.desafio02.cursos.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
