@@ -18,4 +18,12 @@ public class CursoService {
     public Curso salvar(Curso curso) {
         return cursoRepository.save(curso);
     }
+
+    public Curso desabilitarCurso(Long id) {
+        Curso curso = cursoRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Curso não encontrado")
+        );
+        curso.setAtivo(false);
+        return curso;
+    }
 }
