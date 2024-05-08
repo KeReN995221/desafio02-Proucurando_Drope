@@ -3,27 +3,29 @@ package com.desafio02.cursos.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_curso")
 
-public class Curso {
+public class Curso implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
-    @Column(name = "nome", unique = true)
+    @Column(name = "nome", unique = true, nullable = false)
     private String nome;
-    @Column(name = "quantidade_horas")
+    @Column(name = "quantidade_horas", unique = true)
     private int quantidadeHoras;
-    @Column(name = "professor")
+    @Column(name = "professor", unique = true)
     private String professor;
-    @Column(name = "area_conhecimento")
+    @Column(name = "area_conhecimento", unique = true)
     private String areaConhecimento;
-    @Column(name = "ativo")
+    @Column(name = "ativo", unique = true)
     private boolean ativo;
 
     @Override
