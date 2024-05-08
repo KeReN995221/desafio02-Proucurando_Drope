@@ -16,16 +16,37 @@ public class Curso implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "nome", unique = true)
     private String nome;
+
     @Column(name = "quantidade_horas")
     private int quantidadeHoras;
+
     @Column(name = "professor")
     private String professor;
+
     @Column(name = "area_conhecimento")
-    private String areaConhecimento;
+    @Enumerated(EnumType.STRING)
+    private AreaDoConhecimento areaConhecimento;
+
     @Column(name = "ativo")
     private boolean ativo;
+
+    public enum AreaDoConhecimento {
+        INFORMATICA,
+        BIOLOGIA,
+        QUIMICA,
+        FISICA,
+        ASTRONOMIA,
+        SOCIOLOGIA,
+        PSICOLOGIA,
+        ECONOMIA,
+        FILOSOFIA,
+        ARTES,
+        MEDICINA,
+        PEDAGOGIA
+    }
 
     @Override
     public boolean equals(Object o) {
