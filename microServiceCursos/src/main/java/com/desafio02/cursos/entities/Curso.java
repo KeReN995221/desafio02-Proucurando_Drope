@@ -17,7 +17,7 @@ public class Curso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "nome")
+    @Column(name = "nome", unique = true)
     private String nome;
     @Column(name = "quantidade_horas")
     private int quantidadeHoras;

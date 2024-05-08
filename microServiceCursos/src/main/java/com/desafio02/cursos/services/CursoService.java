@@ -18,4 +18,11 @@ public class CursoService {
     public Curso salvar(Curso curso) {
         return cursoRepository.save(curso);
     }
+
+
+    public Curso mudarProfessor(String nome, Curso curso) {
+        Curso novoCurso = cursoRepository.findByNome(nome);
+        novoCurso.setProfessor(curso.getProfessor());
+        return novoCurso;
+    }
 }
