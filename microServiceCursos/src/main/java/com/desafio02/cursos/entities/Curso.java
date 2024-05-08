@@ -1,4 +1,4 @@
-package com.desafio02.alunos_matriculas.entidades;
+package com.desafio02.cursos.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,39 +6,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_aluno")
-public class Aluno {
+@Table(name = "tb_curso")
+public class Curso {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-
     @Column(name = "nome")
     private String nome;
-
-    @Column(name = "cpf")
-    private String cpf;
-
-    @Column(name = "data_nascimento")
-    private LocalDate dataNascimento;
-
-    @Column(name = "sexo")
-    @Enumerated(EnumType.STRING)
-    private Sexo sexo;
-
+    @Column(name = "quantidade_horas")
+    private int quantidadeHoras;
+    @Column(name = "professor")
+    private String professor;
+    @Column(name = "area_conhecimento")
+    private String areaConhecimento;
     @Column(name = "ativo")
     private boolean ativo;
-
-
-    public enum Sexo{
-        M,
-        F
-    }
-
-
 }
