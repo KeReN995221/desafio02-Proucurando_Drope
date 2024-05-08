@@ -19,9 +19,12 @@ public class CursoService {
         return cursoRepository.save(curso);
     }
 
-    public Curso mudarProfessor(String nome, Curso curso) {
-        Curso novoCurso = cursoRepository.findByNome(nome);
+    public Curso mudarProfessor(Long id, Curso curso) {
+        Curso novoCurso = cursoRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Curso não encontrado")
+        );
         novoCurso.setProfessor(curso.getProfessor());
+        cursoRepository.save(novoCurso);
         return novoCurso;
     }
 
@@ -30,6 +33,7 @@ public class CursoService {
                 () -> new RuntimeException("Curso não encontrado")
         );
         curso.setAtivo(false);
+        cursoRepository.save(curso);
         return curso;
     }
 }

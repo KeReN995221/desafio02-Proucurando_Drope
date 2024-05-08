@@ -3,13 +3,14 @@ package com.desafio02.cursos.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_curso")
-
-public class Curso {
+public class Curso implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

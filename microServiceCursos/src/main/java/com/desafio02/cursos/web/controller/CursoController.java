@@ -2,6 +2,8 @@ package com.desafio02.cursos.web.controller;
 
 import com.desafio02.cursos.entities.Curso;
 import com.desafio02.cursos.services.CursoService;
+import com.desafio02.cursos.web.dto.ProfessorCursoDto;
+import com.desafio02.cursos.web.dto.mapper.ProfessorCursoMapper;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,9 +29,10 @@ public class CursoController {
         return ResponseEntity.status(HttpStatus.OK).body(novoCurso);
     }
 
-    @PatchMapping("/{nome}")
-    public ResponseEntity<Curso> alterarProfessor(@PathVariable String nome ,@RequestBody Curso curso) {
-        Curso novoCurso = cursoService.mudarProfessor(nome ,curso);
-        return ResponseEntity.status(201).body(novoCurso);
+    @PatchMapping("/{id}")
+    public ResponseEntity<ProfessorCursoDto> alterarProfessor(@PathVariable Long id , @RequestBody ProfessorCursoDto dto) {
+        Curso curso = cursoService.mudarProfessor(id , ProfessorCursoMapper.toCurso(dto));
+
+        return ResponseEntity.status(200).build();
     }
 }
