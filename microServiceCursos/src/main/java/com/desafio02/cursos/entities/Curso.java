@@ -10,22 +10,21 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_curso")
-
 public class Curso implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
     private Long id;
-    @Column(name = "nome", unique = true, nullable = false)
+    @Column(name = "nome", unique = true)
     private String nome;
-    @Column(name = "quantidade_horas", unique = true)
+    @Column(name = "quantidade_horas")
     private int quantidadeHoras;
-    @Column(name = "professor", unique = true)
+    @Column(name = "professor")
     private String professor;
-    @Column(name = "area_conhecimento", unique = true)
+    @Column(name = "area_conhecimento")
     private String areaConhecimento;
-    @Column(name = "ativo", unique = true)
+    @Column(name = "ativo")
     private boolean ativo;
 
     @Override

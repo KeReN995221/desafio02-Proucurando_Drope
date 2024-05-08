@@ -33,6 +33,6 @@ public class CursoController {
     public ResponseEntity<ProfessorCursoDto> alterarProfessor(@PathVariable Long id , @RequestBody ProfessorCursoDto dto) {
         Curso curso = cursoService.mudarProfessor(id , ProfessorCursoMapper.toCurso(dto));
 
-        return ResponseEntity.status(200).body(ProfessorCursoMapper.toDto(curso));
+        return ResponseEntity.status(200).build();
     }
 }
