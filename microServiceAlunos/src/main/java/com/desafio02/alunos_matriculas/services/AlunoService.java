@@ -11,10 +11,17 @@ import org.springframework.stereotype.Service;
 public class AlunoService {
     private final AlunoRepository alunoRepository;
 
-        @Transactional
-        public Aluno salvar(Aluno aluno) {
+    @Transactional
+    public Aluno salvar(Aluno aluno) {
             return alunoRepository.save(aluno);
-        }
+    }
 
+    @Transactional
+    public Aluno inabilitarAluno(Long id) {
+        Aluno aluno = alunoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Id de aluno não encontrado"));
+        aluno.setAtivo(false);
+        return aluno;
 
+    }
 }
