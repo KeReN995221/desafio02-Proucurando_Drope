@@ -4,10 +4,7 @@ import com.desafio02.alunos_matriculas.entities.Aluno;
 import com.desafio02.alunos_matriculas.services.AlunoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +18,12 @@ public class AlunoController {
     @PostMapping
     public ResponseEntity<Aluno> cadastrarAluno(@RequestBody Aluno aluno) {
         alunoService.salvar(aluno);
-        return ResponseEntity.ok(aluno);
+        return ResponseEntity.status(201).body(aluno);
+    }
+
+    @PatchMapping("inativar-aluno/{id}")
+    public ResponseEntity<Aluno> atualizarAluno(@PathVariable  Long id) {
+        Aluno alunoInabilitado = alunoService.inabilitarAluno(id);
+        return ResponseEntity.ok().body(alunoInabilitado);
     }
 }
