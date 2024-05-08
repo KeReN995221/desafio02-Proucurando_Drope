@@ -1,16 +1,14 @@
 package com.desafio02.cursos.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_curso")
+
 public class Curso {
 
     @Id
@@ -27,4 +25,18 @@ public class Curso {
     private String areaConhecimento;
     @Column(name = "ativo")
     private boolean ativo;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Curso curso = (Curso) o;
+        return id.equals(curso.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }
