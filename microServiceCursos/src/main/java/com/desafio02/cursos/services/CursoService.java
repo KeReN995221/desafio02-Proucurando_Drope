@@ -23,7 +23,8 @@ public class CursoService {
         Curso novoCurso = cursoRepository.findByNome(nome);
         novoCurso.setProfessor(curso.getProfessor());
         return novoCurso;
-  
+    }
+
     public Curso desabilitarCurso(Long id) {
         Curso curso = cursoRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Curso não encontrado")
