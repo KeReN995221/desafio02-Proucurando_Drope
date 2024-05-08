@@ -26,4 +26,10 @@ public class CursoController {
         Curso novoCurso = cursoService.desabilitarCurso(id);
         return ResponseEntity.status(HttpStatus.OK).body(novoCurso);
     }
+
+    @PatchMapping("/{nome}")
+    public ResponseEntity<Curso> alterarProfessor(@PathVariable String nome ,@RequestBody Curso curso) {
+        Curso novoCurso = cursoService.mudarProfessor(nome ,curso);
+        return ResponseEntity.status(201).body(novoCurso);
+    }
 }
