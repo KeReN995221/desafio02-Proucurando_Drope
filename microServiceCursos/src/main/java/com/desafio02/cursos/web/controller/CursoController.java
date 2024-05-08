@@ -31,8 +31,7 @@ public class CursoController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<ProfessorCursoDto> alterarProfessor(@PathVariable Long id , @RequestBody ProfessorCursoDto dto) {
-        Curso curso = cursoService.mudarProfessor(id , ProfessorCursoMapper.toCurso(dto));
-
+        cursoService.mudarProfessor(id , ProfessorCursoMapper.toCurso(dto));
         return ResponseEntity.status(200).build();
     }
 }
