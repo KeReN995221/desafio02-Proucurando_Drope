@@ -10,6 +10,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CursoService {
@@ -44,5 +46,17 @@ public class CursoService {
         else throw new UnableCourseException("O curso já esta desabilitado");
         cursoRepository.save(curso);
         return curso;
+    }
+
+    @Transactional(readOnly = true)
+    public Curso buscarPorId(Long id) {
+        return cursoRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Curso não encontrado", id))
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public List<Curso> buscarTodos() {
+        return cursoRepository.findAll();
     }
 }
