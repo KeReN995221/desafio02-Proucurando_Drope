@@ -4,10 +4,13 @@ import com.desafio02.alunos_matriculas.entities.Aluno;
 import com.desafio02.alunos_matriculas.exceptions.CpfUniqueViolationException;
 import com.desafio02.alunos_matriculas.exceptions.EntityNotFoundException;
 import com.desafio02.alunos_matriculas.repositories.AlunoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -31,4 +34,17 @@ public class AlunoService {
         aluno.setAtivo(false);
         return aluno;
     }
+
+    @Transactional
+    public Aluno buscarPorId(Long id) {
+        return alunoRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Aluno id=%s não encontrado", id))
+        );
+    }
+
+    @Transactional
+    public List<Aluno> buscarTodos() {
+        return alunoRepository.findAll();
+    }
+
 }
