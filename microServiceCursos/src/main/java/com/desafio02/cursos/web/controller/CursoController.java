@@ -5,6 +5,11 @@ import com.desafio02.cursos.services.CursoService;
 import com.desafio02.cursos.web.dto.ProfessorCursoDto;
 import com.desafio02.cursos.web.dto.mapper.ProfessorCursoMapper;
 import com.desafio02.cursos.web.exception.ErrorMessage;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -54,7 +59,8 @@ public class CursoController {
 
     @Operation(summary = "Alterar professor", description = "Funcionalidade de alterar o professor do curso",
             responses = {
-                    @ApiResponse(responseCode = "204", description = "Professor atualizado com sucesso"),
+                    @ApiResponse(responseCode = "200", description = "Professor atualizado com sucesso",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Void.class))),
                     @ApiResponse(responseCode = "404", description = "Curso não encontrado",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
                     @ApiResponse(responseCode = "400", description = "Campos inválidos ou mal formatados",
@@ -66,12 +72,30 @@ public class CursoController {
         return ResponseEntity.status(200).build();
     }
 
+    @Operation(summary = "Recuperar um curso pelo id", description = "Funcionalidade de buscar curso pelo id",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
+                    @ApiResponse(responseCode = "404", description = "Recursos não encontrado",
+                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
+
+            }
+    )
     @GetMapping("/{id}")
     public ResponseEntity<Curso> getById(@PathVariable Long id) {
         Curso curso = cursoService.buscarPorId(id);
         return ResponseEntity.ok(curso);
     }
 
+    @Operation(summary = "Lista com todos os Cursos cadastrados",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Lista com todos os cursos cadastrados",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
+                    @ApiResponse(responseCode = "404", description = "Não há cursos cadastrados",
+                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))
+                    )
+            }
+    )
     @GetMapping
     public ResponseEntity<List<Curso>> getAll() {
         List<Curso> cursos = cursoService.buscarTodos();
