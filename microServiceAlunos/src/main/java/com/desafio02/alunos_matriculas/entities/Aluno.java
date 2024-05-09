@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +22,7 @@ public class Aluno {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "cpf")
+    @Column(name = "cpf", length = 11, unique = true)
     private String cpf;
 
     @Column(name = "data_nascimento")
@@ -33,7 +34,6 @@ public class Aluno {
 
     @Column(name = "ativo")
     private boolean ativo;
-
 
     public enum Sexo{
         M,
