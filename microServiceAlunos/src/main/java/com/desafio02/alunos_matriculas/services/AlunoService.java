@@ -4,7 +4,6 @@ import com.desafio02.alunos_matriculas.entities.Aluno;
 import com.desafio02.alunos_matriculas.exceptions.CpfUniqueViolationException;
 import com.desafio02.alunos_matriculas.exceptions.EntityNotFoundException;
 import com.desafio02.alunos_matriculas.repositories.AlunoRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
