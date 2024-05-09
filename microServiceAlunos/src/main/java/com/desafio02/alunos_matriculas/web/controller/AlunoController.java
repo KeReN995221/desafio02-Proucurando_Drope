@@ -21,7 +21,7 @@ public class AlunoController {
         return ResponseEntity.status(201).body(aluno);
     }
 
-    @PatchMapping("inativar-aluno/{id}")
+    @PatchMapping("/inativar-aluno/{id}")
     public ResponseEntity<Aluno> atualizarAluno(@PathVariable  Long id) {
         Aluno alunoInabilitado = alunoService.inabilitarAluno(id);
         return ResponseEntity.ok().body(alunoInabilitado);

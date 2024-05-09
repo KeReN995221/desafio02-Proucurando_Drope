@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/cursos")
@@ -35,4 +37,17 @@ public class CursoController {
 
         return ResponseEntity.status(200).build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Curso> getById(@PathVariable Long id) {
+        Curso curso = cursoService.buscarPorId(id);
+        return ResponseEntity.ok(curso);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Curso>> getAll() {
+        List<Curso> cursos = cursoService.buscarTodos();
+        return ResponseEntity.ok(cursos);
+    }
+
 }

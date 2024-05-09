@@ -2,10 +2,13 @@ package com.desafio02.cursos.services;
 
 import com.desafio02.cursos.entities.Curso;
 import com.desafio02.cursos.repositories.CursoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +38,16 @@ public class CursoService {
         curso.setAtivo(false);
         cursoRepository.save(curso);
         return curso;
+    }
+
+    @Transactional
+    public Curso buscarPorId(Long id) {
+        return cursoRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Curso não encontrado", id))
+        );
+    }
+
+    public List<Curso> buscarTodos() {
+        return cursoRepository.findAll();
     }
 }
