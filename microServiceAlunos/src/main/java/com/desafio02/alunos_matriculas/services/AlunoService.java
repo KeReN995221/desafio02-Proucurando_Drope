@@ -45,5 +45,4 @@ public class AlunoService {
     public List<Aluno> buscarTodos() {
         return alunoRepository.findAll();
     }
-
 }

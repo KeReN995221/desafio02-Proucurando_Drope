@@ -52,7 +52,6 @@ public class Curso implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Curso curso = (Curso) o;
         return id.equals(curso.id);
     }
