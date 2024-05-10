@@ -3,6 +3,7 @@ package com.desafio02.alunos_matriculas.services;
 import com.desafio02.alunos_matriculas.client.CursoClient;
 import com.desafio02.alunos_matriculas.entities.Aluno;
 import com.desafio02.alunos_matriculas.entities.Matricula;
+import com.desafio02.alunos_matriculas.repositories.AlunoRepository;
 import com.desafio02.alunos_matriculas.repositories.MatriculaRepository;
 import com.desafio02.alunos_matriculas.web.controller.AlunoController;
 import com.desafio02.alunos_matriculas.web.dto.CursoDto;
@@ -14,10 +15,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class MatriculaService {
 
+    private final AlunoRepository alunoRepository;
     private final MatriculaRepository matriculaRepository;
     @Autowired
     private CursoClient cursoClient;
@@ -30,6 +36,7 @@ public class MatriculaService {
                 () -> new EntityNotFoundException(String.format("Matricula id=%s não encontrado", id))
         );
     }
+
     @Transactional
     public Matricula salvar (MatriculaDto matriculaDto) {
         Matricula matricula = new Matricula();
@@ -61,5 +68,20 @@ public class MatriculaService {
     @Transactional
     public void apagarMatricula(Long id) {
         matriculaRepository.delete(buscarPorId(id));
+    }
+
+    @Transactional
+    public List<Aluno> buscarAlunosPorCurso(Long idCurso) {
+        List<Long> idAlunos = new ArrayList<>();
+        List<Aluno> alunos = new ArrayList<>();
+        for (Matricula matricula : matriculaRepository.findAll()) {
+            if (matricula.getIdCurso().equals(idCurso)) {
+                idAlunos.add(matricula.getIdAluno());
+            }
+        }
+        for (Long id : idAlunos) {
+            alunos.add(alunoRepository.findById(id).orElseThrow());
+        }
+        return alunos;
     }
 }
