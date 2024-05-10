@@ -44,4 +44,8 @@ public class MatriculaService {
         }
         return matriculaRepository.save(matricula);
     }
+
+    public void apagarMatricula(Long id) {
+        matriculaRepository.deleteById(id);
+    }
 }

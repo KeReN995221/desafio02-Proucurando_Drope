@@ -19,4 +19,10 @@ public class MatriculaController {
         Matricula matricula = matriculaService.salvar(matriculaDto);
         return ResponseEntity.status(201).body(matriculaDto);
     }
+
+    @DeleteMapping("/id")
+    public ResponseEntity<Void> deletarMatricula(@PathVariable Long id) {
+        matriculaService.apagarMatricula(id);
+        return ResponseEntity.ok().build();
+    }
 }

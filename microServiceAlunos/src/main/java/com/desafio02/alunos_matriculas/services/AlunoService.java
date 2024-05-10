@@ -27,9 +27,7 @@ public class AlunoService {
 
     @Transactional
     public Aluno inabilitarAluno(Long id) {
-        Aluno aluno = alunoRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Id de aluno não encontrado")
-        );
+        Aluno aluno = buscarPorId(id);
         aluno.setAtivo(false);
         return aluno;
     }
@@ -44,5 +42,22 @@ public class AlunoService {
     @Transactional
     public List<Aluno> buscarTodos() {
         return alunoRepository.findAll();
+    }
+
+    @Transactional
+    public Aluno mudarAluno(Long id, Aluno alunoEditado) {
+        Aluno aluno = buscarPorId(id);
+        aluno.setAtivo(alunoEditado.isAtivo());
+        aluno.setCpf(alunoEditado.getCpf());
+        aluno.setSexo(alunoEditado.getSexo());
+        aluno.setDataNascimento(alunoEditado.getDataNascimento());
+        aluno.setNome(alunoEditado.getNome());
+        return salvar(aluno);
+    }
+
+    @Transactional
+    public void apagarAluno(Long id) {
+        Aluno aluno = buscarPorId(id);
+        alunoRepository.delete(aluno);
     }
 }
