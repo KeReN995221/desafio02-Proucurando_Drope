@@ -9,12 +9,14 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_aluno")
 public class Aluno {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

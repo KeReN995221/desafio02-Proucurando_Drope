@@ -1,10 +1,10 @@
 package com.desafio02.alunos_matriculas.entities;
 
-import com.desafio02.alunos_matriculas.entities.Aluno;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @RequiredArgsConstructor
 @Table(name = "tb_matriculas")
