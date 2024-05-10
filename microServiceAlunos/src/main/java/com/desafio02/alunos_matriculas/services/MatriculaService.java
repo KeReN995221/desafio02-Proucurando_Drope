@@ -7,6 +7,7 @@ import com.desafio02.alunos_matriculas.repositories.MatriculaRepository;
 import com.desafio02.alunos_matriculas.web.controller.AlunoController;
 import com.desafio02.alunos_matriculas.web.dto.CursoDto;
 import com.desafio02.alunos_matriculas.web.dto.MatriculaDto;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +24,12 @@ public class MatriculaService {
     @Autowired
     private AlunoController alunoController;
 
+    @Transactional
+    public Matricula buscarPorId(Long id) {
+        return matriculaRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Matricula id=%s não encontrado", id))
+        );
+    }
     @Transactional
     public Matricula salvar (MatriculaDto matriculaDto) {
         Matricula matricula = new Matricula();
@@ -44,8 +51,15 @@ public class MatriculaService {
         }
         return matriculaRepository.save(matricula);
     }
+    @Transactional
+    public Matricula inativarMatricula(Long id) {
+        Matricula matricula = buscarPorId(id);
+        matricula.setAtivo(false);
+        return matricula;
+    }
 
+    @Transactional
     public void apagarMatricula(Long id) {
-        matriculaRepository.deleteById(id);
+        matriculaRepository.delete(buscarPorId(id));
     }
 }
