@@ -73,4 +73,11 @@ public class CursoService {
         cursoRepository.save(curso);
         return curso;
     }
+
+    public void apagarCurso(Long id) {
+        Curso curso = cursoRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Curso não encontrado")
+        );
+        cursoRepository.delete(curso);
+    }
 }
