@@ -27,9 +27,7 @@ public class AlunoService {
 
     @Transactional
     public Aluno inabilitarAluno(Long id) {
-        Aluno aluno = alunoRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Id de aluno não encontrado")
-        );
+        Aluno aluno = buscarPorId(id);
         aluno.setAtivo(false);
         return aluno;
     }
@@ -48,9 +46,7 @@ public class AlunoService {
 
     @Transactional
     public Aluno mudarAluno(Long id, Aluno alunoEditado) {
-        Aluno aluno = alunoRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(String.format("Aluno id=%s não encontrado", id))
-        );
+        Aluno aluno = buscarPorId(id);
         aluno.setAtivo(alunoEditado.isAtivo());
         aluno.setCpf(alunoEditado.getCpf());
         aluno.setSexo(alunoEditado.getSexo());
