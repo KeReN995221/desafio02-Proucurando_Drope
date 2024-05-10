@@ -33,6 +33,9 @@ public class Curso implements Serializable {
     @Column(name = "ativo")
     private boolean ativo;
 
+    @Column(name = "total_alunos")
+    private Integer totalAlunos;
+
     public enum AreaDoConhecimento {
         INFORMATICA,
         BIOLOGIA,

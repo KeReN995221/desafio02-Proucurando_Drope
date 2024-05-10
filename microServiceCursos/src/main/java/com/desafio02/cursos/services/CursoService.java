@@ -21,6 +21,7 @@ public class CursoService {
     @Transactional
     public Curso salvar(Curso curso) {
         try {
+            curso.setTotalAlunos(0);
             return cursoRepository.save(curso);
         } catch (DataIntegrityViolationException ex) {
             throw new NameUniqueViolationException("O nome do curso deve ser único");
@@ -79,5 +80,17 @@ public class CursoService {
                 () -> new EntityNotFoundException("Curso não encontrado")
         );
         cursoRepository.delete(curso);
+    }
+
+    @Transactional
+    public void aumentarTotalMatriculas(Long id) {
+        Curso curso = buscarPorId(id);
+        curso.setTotalAlunos(curso.getTotalAlunos()+1);
+    }
+
+    @Transactional
+    public void diminuirTotalMatriculas(Long id) {
+        Curso curso = buscarPorId(id);
+        curso.setTotalAlunos(curso.getTotalAlunos()-1);
     }
 }

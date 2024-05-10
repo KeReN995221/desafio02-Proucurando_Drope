@@ -111,4 +111,16 @@ public class CursoController {
         cursoService.apagarCurso(id);
         return ResponseEntity.ok().build();
     }
+
+    @PatchMapping("/matricular/{id}")
+    public ResponseEntity<Void> matricular(@PathVariable Long id) {
+        cursoService.aumentarTotalMatriculas(id);
+        return ResponseEntity.status(200).build();
+    }
+
+    @PatchMapping("/desmatricular/{id}")
+    public ResponseEntity<Void> desamatricular(@PathVariable Long id) {
+        cursoService.diminuirTotalMatriculas(id);
+        return ResponseEntity.status(200).build();
+    }
 }
