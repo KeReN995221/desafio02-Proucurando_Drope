@@ -54,4 +54,10 @@ public class AlunoService {
         aluno.setNome(alunoEditado.getNome());
         return salvar(aluno);
     }
+
+    @Transactional
+    public void apagarAluno(Long id) {
+        Aluno aluno = buscarPorId(id);
+        alunoRepository.delete(aluno);
+    }
 }

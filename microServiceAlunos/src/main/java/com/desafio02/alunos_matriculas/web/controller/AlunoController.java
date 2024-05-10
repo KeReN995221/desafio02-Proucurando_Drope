@@ -94,4 +94,10 @@ public class AlunoController {
         Aluno aluno = alunoService.mudarAluno(id, alunoEditado);
         return ResponseEntity.ok(aluno);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarAluno(@PathVariable Long id) {
+        alunoService.apagarAluno(id);
+        return ResponseEntity.ok().build();
+    }
 }
