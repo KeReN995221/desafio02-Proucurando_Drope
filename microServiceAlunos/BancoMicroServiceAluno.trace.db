@@ -1,6 +1,0 @@
-2024-05-09 21:35:30.821147-03:00 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM TB_MATRICULAS TB_ALUNO [*]TB_ALUNO TB_ALUNO"; SQL statement:
-SELECT * FROM TB_MATRICULAS TB_ALUNO TB_ALUNO TB_ALUNO [42000-224]
-2024-05-09 22:59:28.927507-03:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLDataException: Value too long for column "CPF CHARACTER VARYING(11)": "'333333333333' (12)"; SQL statement:
-insert into tb_aluno (ativo,cpf,data_nascimento,nome,sexo,id) values (?,?,?,?,?,default) [22001-224]

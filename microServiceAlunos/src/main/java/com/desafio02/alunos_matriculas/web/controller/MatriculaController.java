@@ -1,6 +1,5 @@
 package com.desafio02.alunos_matriculas.web.controller;
 
-import com.desafio02.alunos_matriculas.entities.Aluno;
 import com.desafio02.alunos_matriculas.entities.Matricula;
 import com.desafio02.alunos_matriculas.services.MatriculaService;
 import com.desafio02.alunos_matriculas.web.dto.ListaAlunosDeCursoDto;
@@ -8,8 +7,6 @@ import com.desafio02.alunos_matriculas.web.dto.MatriculaDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,10 +27,9 @@ public class MatriculaController {
         return ResponseEntity.ok(alunos);
     }
 
-
     @PostMapping
     public ResponseEntity<MatriculaDto> matricularAluno(@RequestBody MatriculaDto matriculaDto) {
-        Matricula matricula = matriculaService.salvar(matriculaDto);
+        matriculaService.salvar(matriculaDto);
         return ResponseEntity.status(201).body(matriculaDto);
     }
 
