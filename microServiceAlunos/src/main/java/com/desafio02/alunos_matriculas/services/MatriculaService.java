@@ -7,16 +7,18 @@ import com.desafio02.alunos_matriculas.repositories.AlunoRepository;
 import com.desafio02.alunos_matriculas.repositories.MatriculaRepository;
 import com.desafio02.alunos_matriculas.web.controller.AlunoController;
 import com.desafio02.alunos_matriculas.web.dto.CursoDto;
+import com.desafio02.alunos_matriculas.web.dto.ListaAlunosDeCursoDto;
 import com.desafio02.alunos_matriculas.web.dto.MatriculaDto;
+import com.desafio02.alunos_matriculas.web.dto.mapper.AlunoMapper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -71,17 +73,26 @@ public class MatriculaService {
     }
 
     @Transactional
-    public List<Aluno> buscarAlunosPorCurso(Long idCurso) {
+    public ListaAlunosDeCursoDto buscarAlunosPorCurso(Long idCurso) {
+        ListaAlunosDeCursoDto listaAlunosDto = new ListaAlunosDeCursoDto();
         List<Long> idAlunos = new ArrayList<>();
-        List<Aluno> alunos = new ArrayList<>();
+
+
+        CursoDto curso = cursoClient.getCursoById(idCurso);
+
         for (Matricula matricula : matriculaRepository.findAll()) {
             if (matricula.getIdCurso().equals(idCurso)) {
                 idAlunos.add(matricula.getIdAluno());
             }
         }
         for (Long id : idAlunos) {
-            alunos.add(alunoRepository.findById(id).orElseThrow());
+            listaAlunosDto.getAlunos().add( AlunoMapper.toDto(alunoRepository.findById(id).orElseThrow()));
+
         }
-        return alunos;
+
+        listaAlunosDto.setTotalAlunos(listaAlunosDto.getAlunos().size());
+        listaAlunosDto.setProfessor(curso.getProfessor());
+        listaAlunosDto.setCurso(curso.getNome());
+        return listaAlunosDto;
     }
 }

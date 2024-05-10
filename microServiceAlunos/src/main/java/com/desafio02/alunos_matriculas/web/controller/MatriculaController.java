@@ -3,6 +3,7 @@ package com.desafio02.alunos_matriculas.web.controller;
 import com.desafio02.alunos_matriculas.entities.Aluno;
 import com.desafio02.alunos_matriculas.entities.Matricula;
 import com.desafio02.alunos_matriculas.services.MatriculaService;
+import com.desafio02.alunos_matriculas.web.dto.ListaAlunosDeCursoDto;
 import com.desafio02.alunos_matriculas.web.dto.MatriculaDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,8 @@ public class MatriculaController {
     }
 
     @GetMapping("/curso/{id}")
-    public ResponseEntity<List<Aluno>> GetAllMatriculasFromCursoId(@PathVariable Long id) {
-        List<Aluno> alunos = matriculaService.buscarAlunosPorCurso(id);
+    public ResponseEntity<ListaAlunosDeCursoDto> GetAllMatriculasFromCursoId(@PathVariable Long id) {
+        ListaAlunosDeCursoDto alunos = matriculaService.buscarAlunosPorCurso(id);
         return ResponseEntity.ok(alunos);
     }
 
