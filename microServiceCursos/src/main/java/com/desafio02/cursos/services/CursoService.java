@@ -59,4 +59,18 @@ public class CursoService {
     public List<Curso> buscarTodos() {
         return cursoRepository.findAll();
     }
+
+    @Transactional
+    public Curso alterarCurso(Long id, Curso cursoAlterado) {
+        Curso curso = cursoRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Curso não encontrado")
+        );
+        curso.setProfessor(cursoAlterado.getProfessor());
+        curso.setAtivo(cursoAlterado.isAtivo());
+        curso.setNome(cursoAlterado.getNome());
+        curso.setAreaConhecimento(cursoAlterado.getAreaConhecimento());
+        curso.setQuantidadeHoras(cursoAlterado.getQuantidadeHoras());
+        cursoRepository.save(curso);
+        return curso;
+    }
 }

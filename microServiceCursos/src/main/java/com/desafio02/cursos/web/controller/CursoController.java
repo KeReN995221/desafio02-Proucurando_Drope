@@ -100,4 +100,9 @@ public class CursoController {
         List<Curso> cursos = cursoService.buscarTodos();
         return ResponseEntity.ok(cursos);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Curso> editarCurso(@PathVariable Long id, @RequestBody Curso cursoAlterado) {
+        Curso curso = cursoService.alterarCurso(id, cursoAlterado);
+        return ResponseEntity.ok().body(curso);    }
 }
