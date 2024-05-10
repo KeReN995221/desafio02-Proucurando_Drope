@@ -112,13 +112,13 @@ public class CursoController {
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping("/matricular/{id}")
+    @PostMapping("/matricular/{id}")
     public ResponseEntity<Void> matricular(@PathVariable Long id) {
         cursoService.aumentarTotalMatriculas(id);
         return ResponseEntity.status(200).build();
     }
 
-    @PatchMapping("/desmatricular/{id}")
+    @PostMapping("/desmatricular/{id}")
     public ResponseEntity<Void> desamatricular(@PathVariable Long id) {
         cursoService.diminuirTotalMatriculas(id);
         return ResponseEntity.status(200).build();

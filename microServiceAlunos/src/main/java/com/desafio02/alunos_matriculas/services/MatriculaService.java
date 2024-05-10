@@ -14,7 +14,6 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +39,7 @@ public class MatriculaService {
     }
 
     @Transactional
-    public Matricula salvar (MatriculaDto matriculaDto) {
+    public void salvar (MatriculaDto matriculaDto) {
         Matricula matricula = new Matricula();
         try {
             CursoDto curso = cursoClient.getCursoById(matriculaDto.getIdCurso());
@@ -58,25 +57,28 @@ public class MatriculaService {
         catch (RuntimeException x) {
             throw new RuntimeException("Matricula inválida.");
         }
-        return matriculaRepository.save(matricula);
+        matriculaRepository.save(matricula);
+        cursoClient.matricular(matricula.getIdCurso());
     }
+
     @Transactional
     public Matricula inativarMatricula(Long id) {
         Matricula matricula = buscarPorId(id);
         matricula.setAtivo(false);
+        cursoClient.desamatricular(buscarPorId(id).getIdCurso());
         return matricula;
     }
 
     @Transactional
     public void apagarMatricula(Long id) {
         matriculaRepository.delete(buscarPorId(id));
+        cursoClient.desamatricular(buscarPorId(id).getIdCurso());
     }
 
     @Transactional
     public ListaAlunosDeCursoDto buscarAlunosPorCurso(Long idCurso) {
         ListaAlunosDeCursoDto listaAlunosDto = new ListaAlunosDeCursoDto();
         List<Long> idAlunos = new ArrayList<>();
-
 
         CursoDto curso = cursoClient.getCursoById(idCurso);
 
@@ -87,7 +89,6 @@ public class MatriculaService {
         }
         for (Long id : idAlunos) {
             listaAlunosDto.getAlunos().add( AlunoMapper.toDto(alunoRepository.findById(id).orElseThrow()));
-
         }
 
         listaAlunosDto.setTotalAlunos(listaAlunosDto.getAlunos().size());
