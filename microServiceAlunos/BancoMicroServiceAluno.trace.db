@@ -1,0 +1,3 @@
+2024-05-09 21:35:30.821147-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM TB_MATRICULAS TB_ALUNO [*]TB_ALUNO TB_ALUNO"; SQL statement:
+SELECT * FROM TB_MATRICULAS TB_ALUNO TB_ALUNO TB_ALUNO [42000-224]
