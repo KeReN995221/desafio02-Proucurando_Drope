@@ -89,5 +89,9 @@ public class AlunoController {
         return ResponseEntity.ok(alunos);
     }
 
-
+    @PutMapping("/{id}")
+    public ResponseEntity<Aluno> editarAluno(@PathVariable Long id, @RequestBody Aluno alunoEditado) {
+        Aluno aluno = alunoService.mudarAluno(id, alunoEditado);
+        return ResponseEntity.ok(aluno);
+    }
 }

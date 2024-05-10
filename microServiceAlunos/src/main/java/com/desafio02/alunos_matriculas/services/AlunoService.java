@@ -45,4 +45,17 @@ public class AlunoService {
     public List<Aluno> buscarTodos() {
         return alunoRepository.findAll();
     }
+
+    @Transactional
+    public Aluno mudarAluno(Long id, Aluno alunoEditado) {
+        Aluno aluno = alunoRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Aluno id=%s não encontrado", id))
+        );
+        aluno.setAtivo(alunoEditado.isAtivo());
+        aluno.setCpf(alunoEditado.getCpf());
+        aluno.setSexo(alunoEditado.getSexo());
+        aluno.setDataNascimento(alunoEditado.getDataNascimento());
+        aluno.setNome(alunoEditado.getNome());
+        return salvar(aluno);
+    }
 }
