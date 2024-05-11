@@ -5,6 +5,7 @@ import com.desafio02.alunos_matriculas.entities.Aluno;
 import com.desafio02.alunos_matriculas.entities.Matricula;
 import com.desafio02.alunos_matriculas.exceptions.CpfUniqueViolationException;
 import com.desafio02.alunos_matriculas.exceptions.EntityNotFoundException;
+import com.desafio02.alunos_matriculas.exceptions.UnableAlunoException;
 import com.desafio02.alunos_matriculas.repositories.AlunoRepository;
 import com.desafio02.alunos_matriculas.repositories.MatriculaRepository;
 import jakarta.transaction.Transactional;
@@ -36,11 +37,18 @@ public class AlunoService {
     @Transactional
     public Aluno inabilitarAluno(Long id) {
         Aluno aluno = buscarPorId(id);
-        aluno.setAtivo(false);
+        alunoRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Aluno não encontrado")
+        );
+        if (aluno.isAtivo()) {
+            aluno.setAtivo(false);
+        }
+        else throw new UnableAlunoException("O aluno já esta desabilitado");
+
         List<Matricula> matriculaLista = buscarMatriculasPorAluno(id);
-        for(Matricula m : matriculaLista){
-            m.setAtivo(false);
-            cursoClient.desamatricular(m.getIdCurso());
+        for(Matricula matricula : matriculaLista){
+            matricula.setAtivo(false);
+            cursoClient.desamatricular(matricula.getIdCurso());
         }
         return aluno;
     }
@@ -60,7 +68,6 @@ public class AlunoService {
     @Transactional
     public List<Matricula> buscarMatriculasPorAluno(Long id) {
         List<Matricula> listaMatriculas = new ArrayList<>();
-
         for (Matricula matricula : matriculaRepository.findAll()) {
             if (matricula.getIdAluno().equals(id)) {
                 listaMatriculas.add(matricula);
