@@ -61,6 +61,13 @@ public class CursoService {
         return cursoRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public Integer buscarTotalAlunos(Long id) {
+        Curso curso = cursoRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Curso não encontrado", id))
+        );
+        return curso.getTotalAlunos();
+    }
     @Transactional
     public Curso alterarCurso(Long id, Curso cursoAlterado) {
         Curso curso = cursoRepository.findById(id).orElseThrow(

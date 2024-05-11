@@ -44,6 +44,10 @@ public class MatriculaService {
         try {
             CursoDto curso = cursoClient.getCursoById(matriculaDto.getIdCurso());
             Aluno aluno = alunoController.getById(matriculaDto.getIdAluno()).getBody();
+
+            if (cursoClient.getTotalAlunos(curso.getId()) >= 10) {
+                throw new RuntimeException("Não pode haver mais de dez alunos matriculados.");
+            }
             if (!curso.isAtivo()) {
                 throw new RuntimeException("O curso não está ativo e não pode ser matriculado.");
             }

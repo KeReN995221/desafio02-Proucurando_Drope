@@ -101,6 +101,11 @@ public class CursoController {
         return ResponseEntity.ok(cursos);
     }
 
+    @GetMapping("/total-alunos/{id}")
+    public ResponseEntity<Integer> getTotalAlunos(@PathVariable Long id) {
+        return ResponseEntity.ok(cursoService.buscarTotalAlunos(id));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Curso> editarCurso(@PathVariable Long id, @RequestBody Curso cursoAlterado) {
         Curso curso = cursoService.alterarCurso(id, cursoAlterado);
