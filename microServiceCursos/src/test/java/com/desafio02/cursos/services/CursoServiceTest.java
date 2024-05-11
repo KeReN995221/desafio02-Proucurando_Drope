@@ -40,7 +40,7 @@ public class CursoServiceTest {
         assertThatThrownBy(() -> cursoService.salvar(CURSO_INVALIDO)).isInstanceOf(RuntimeException.class);
     }
 
-    
+
 
     @Test
     void getById_ComIdExistente_RetornarCurso(){
@@ -53,7 +53,6 @@ public class CursoServiceTest {
     void getById_ComIdInexistente_RetornarVazio(){
         when(cursoRepository.findById(null)).thenThrow(EntityNotFoundException.class);
         assertThatThrownBy(() -> cursoService.buscarPorId(null)).isInstanceOf(EntityNotFoundException.class);
-
     }
 
 }
