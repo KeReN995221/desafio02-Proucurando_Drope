@@ -17,4 +17,7 @@ public interface CursoClient {
 
     @PostMapping("/desmatricular/{id}")
     Void desamatricular(@PathVariable Long id);
+
+    @GetMapping("/total-alunos/{id}")
+    Integer getTotalAlunos(@PathVariable Long id);
 }

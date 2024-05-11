@@ -44,6 +44,10 @@ public class MatriculaService {
         try {
             CursoDto curso = cursoClient.getCursoById(matriculaDto.getIdCurso());
             Aluno aluno = alunoController.getById(matriculaDto.getIdAluno()).getBody();
+
+            if (cursoClient.getTotalAlunos(curso.getId()) >= 10) {
+                throw new RuntimeException("Não pode haver mais de dez alunos matriculados.");
+            }
             if (!curso.isAtivo()) {
                 throw new RuntimeException("O curso não está ativo e não pode ser matriculado.");
             }
@@ -76,19 +80,19 @@ public class MatriculaService {
     }
 
     @Transactional
-    public ListaAlunosDeCursoDto buscarAlunosPorCurso(Long idCurso) {
+    public ListaAlunosDeCursoDto buscarAlunosPorCurso(Long id) {
         ListaAlunosDeCursoDto listaAlunosDto = new ListaAlunosDeCursoDto();
         List<Long> idAlunos = new ArrayList<>();
 
-        CursoDto curso = cursoClient.getCursoById(idCurso);
+        CursoDto curso = cursoClient.getCursoById(id);
 
         for (Matricula matricula : matriculaRepository.findAll()) {
-            if (matricula.getIdCurso().equals(idCurso)) {
+            if (matricula.getIdCurso().equals(id)) {
                 idAlunos.add(matricula.getIdAluno());
             }
         }
-        for (Long id : idAlunos) {
-            listaAlunosDto.getAlunos().add( AlunoMapper.toDto(alunoRepository.findById(id).orElseThrow()));
+        for (Long i : idAlunos) {
+            listaAlunosDto.getAlunos().add( AlunoMapper.toDto(alunoRepository.findById(i).orElseThrow()));
         }
 
         listaAlunosDto.setTotalAlunos(listaAlunosDto.getAlunos().size());
