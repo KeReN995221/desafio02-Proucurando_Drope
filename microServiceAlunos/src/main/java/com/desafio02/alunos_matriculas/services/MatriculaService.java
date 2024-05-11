@@ -80,19 +80,19 @@ public class MatriculaService {
     }
 
     @Transactional
-    public ListaAlunosDeCursoDto buscarAlunosPorCurso(Long idCurso) {
+    public ListaAlunosDeCursoDto buscarAlunosPorCurso(Long id) {
         ListaAlunosDeCursoDto listaAlunosDto = new ListaAlunosDeCursoDto();
         List<Long> idAlunos = new ArrayList<>();
 
-        CursoDto curso = cursoClient.getCursoById(idCurso);
+        CursoDto curso = cursoClient.getCursoById(id);
 
         for (Matricula matricula : matriculaRepository.findAll()) {
-            if (matricula.getIdCurso().equals(idCurso)) {
+            if (matricula.getIdCurso().equals(id)) {
                 idAlunos.add(matricula.getIdAluno());
             }
         }
-        for (Long id : idAlunos) {
-            listaAlunosDto.getAlunos().add( AlunoMapper.toDto(alunoRepository.findById(id).orElseThrow()));
+        for (Long i : idAlunos) {
+            listaAlunosDto.getAlunos().add( AlunoMapper.toDto(alunoRepository.findById(i).orElseThrow()));
         }
 
         listaAlunosDto.setTotalAlunos(listaAlunosDto.getAlunos().size());
