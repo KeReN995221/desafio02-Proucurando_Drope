@@ -5,6 +5,7 @@ import com.desafio02.alunos_matriculas.entities.Aluno;
 import com.desafio02.alunos_matriculas.entities.Matricula;
 import com.desafio02.alunos_matriculas.exceptions.CpfUniqueViolationException;
 import com.desafio02.alunos_matriculas.exceptions.EntityNotFoundException;
+import com.desafio02.alunos_matriculas.exceptions.UnableException;
 import com.desafio02.alunos_matriculas.repositories.AlunoRepository;
 import com.desafio02.alunos_matriculas.repositories.MatriculaRepository;
 import jakarta.transaction.Transactional;
@@ -36,11 +37,15 @@ public class AlunoService {
     @Transactional
     public Aluno inabilitarAluno(Long id) {
         Aluno aluno = buscarPorId(id);
-        aluno.setAtivo(false);
+        if (aluno.isAtivo()) {
+            aluno.setAtivo(false);
+        }
+        else throw new UnableException("O aluno já esta desabilitado");
+
         List<Matricula> matriculaLista = buscarMatriculasPorAluno(id);
-        for(Matricula m : matriculaLista){
-            m.setAtivo(false);
-            cursoClient.desamatricular(m.getIdCurso());
+        for(Matricula matricula : matriculaLista){
+            matricula.setAtivo(false);
+            cursoClient.desamatricular(matricula.getIdCurso());
         }
         return aluno;
     }
@@ -54,35 +59,21 @@ public class AlunoService {
 
     @Transactional
     public List<Aluno> buscarTodos() {
-        return alunoRepository.findAll();
+        List<Aluno> alunos = alunoRepository.findAll();
+        if (alunos.isEmpty()) {
+            throw new EntityNotFoundException("Nenhum aluno encontrado");
+        }
+        return alunos;
     }
 
     @Transactional
     public List<Matricula> buscarMatriculasPorAluno(Long id) {
         List<Matricula> listaMatriculas = new ArrayList<>();
-
         for (Matricula matricula : matriculaRepository.findAll()) {
             if (matricula.getIdAluno().equals(id)) {
                 listaMatriculas.add(matricula);
             }
         }
         return listaMatriculas;
-    }
-
-    @Transactional
-    public Aluno mudarAluno(Long id, Aluno alunoEditado) {
-        Aluno aluno = buscarPorId(id);
-        aluno.setAtivo(alunoEditado.isAtivo());
-        aluno.setCpf(alunoEditado.getCpf());
-        aluno.setSexo(alunoEditado.getSexo());
-        aluno.setDataNascimento(alunoEditado.getDataNascimento());
-        aluno.setNome(alunoEditado.getNome());
-        return salvar(aluno);
-    }
-
-    @Transactional
-    public void apagarAluno(Long id) {
-        Aluno aluno = buscarPorId(id);
-        alunoRepository.delete(aluno);
     }
 }

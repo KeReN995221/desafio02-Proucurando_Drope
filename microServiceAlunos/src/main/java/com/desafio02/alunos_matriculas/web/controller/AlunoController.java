@@ -20,7 +20,6 @@ import java.util.List;
 public class AlunoController {
     private final AlunoService alunoService;
 
-
     @Operation(summary = "Recuperar um aluno pelo id",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
@@ -35,7 +34,6 @@ public class AlunoController {
         Aluno aluno = alunoService.buscarPorId(id);
         return ResponseEntity.ok(aluno);
     }
-
 
     @Operation(summary = "Criar um novo aluno",
             responses = {
@@ -53,7 +51,6 @@ public class AlunoController {
         return ResponseEntity.status(201).body(aluno);
     }
 
-
     @Operation(summary = "Desativar status ativo de aluno",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Aluno Inabilitado com sucesso",
@@ -68,11 +65,10 @@ public class AlunoController {
             }
     )
     @PatchMapping("/inativar-aluno/{id}")
-    public ResponseEntity<Aluno> atualizarAluno(@PathVariable  Long id) {
+    public ResponseEntity<Aluno> inativarAluno(@PathVariable  Long id) {
         Aluno alunoInabilitado = alunoService.inabilitarAluno(id);
         return ResponseEntity.ok().body(alunoInabilitado);
     }
-
 
     @Operation(summary = "Lista com todos os Alunos cadastrados",
             responses = {
@@ -87,17 +83,5 @@ public class AlunoController {
     public ResponseEntity<List<Aluno>> getAll() {
         List<Aluno> alunos = alunoService.buscarTodos();
         return ResponseEntity.ok(alunos);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Aluno> editarAluno(@PathVariable Long id, @RequestBody Aluno alunoEditado) {
-        Aluno aluno = alunoService.mudarAluno(id, alunoEditado);
-        return ResponseEntity.ok(aluno);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarAluno(@PathVariable Long id) {
-        alunoService.apagarAluno(id);
-        return ResponseEntity.ok().build();
     }
 }

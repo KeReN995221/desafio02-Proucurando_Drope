@@ -33,12 +33,6 @@ public class MatriculaController {
         return ResponseEntity.status(201).body(matriculaDto);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarMatricula(@PathVariable Long id) {
-        matriculaService.apagarMatricula(id);
-        return ResponseEntity.ok().build();
-    }
-
     @PatchMapping("/inativar-matricula/{id}")
     public ResponseEntity<Matricula> inativarmatricula(@PathVariable  Long id) {
         Matricula matriculainabilitada = matriculaService.inativarMatricula(id);

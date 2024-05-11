@@ -106,17 +106,6 @@ public class CursoController {
         return ResponseEntity.ok(cursoService.buscarTotalAlunos(id));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Curso> editarCurso(@PathVariable Long id, @RequestBody Curso cursoAlterado) {
-        Curso curso = cursoService.alterarCurso(id, cursoAlterado);
-        return ResponseEntity.ok().body(curso);    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarCurso(@PathVariable Long id) {
-        cursoService.apagarCurso(id);
-        return ResponseEntity.ok().build();
-    }
-
     @PostMapping("/matricular/{id}")
     public ResponseEntity<Void> matricular(@PathVariable Long id) {
         cursoService.aumentarTotalMatriculas(id);
