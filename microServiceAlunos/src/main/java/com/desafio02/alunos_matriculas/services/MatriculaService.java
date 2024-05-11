@@ -3,6 +3,9 @@ package com.desafio02.alunos_matriculas.services;
 import com.desafio02.alunos_matriculas.client.CursoClient;
 import com.desafio02.alunos_matriculas.entities.Aluno;
 import com.desafio02.alunos_matriculas.entities.Matricula;
+import com.desafio02.alunos_matriculas.exceptions.InvailidException;
+import com.desafio02.alunos_matriculas.exceptions.NotAllowedException;
+import com.desafio02.alunos_matriculas.exceptions.UnableException;
 import com.desafio02.alunos_matriculas.repositories.AlunoRepository;
 import com.desafio02.alunos_matriculas.repositories.MatriculaRepository;
 import com.desafio02.alunos_matriculas.web.controller.AlunoController;
@@ -34,7 +37,7 @@ public class MatriculaService {
     @Transactional
     public Matricula buscarPorId(Long id) {
         return matriculaRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(String.format("Matricula id=%s não encontrado", id))
+                () -> new EntityNotFoundException(String.format("Matrícula id=%s não encontrada", id))
         );
     }
 
@@ -46,20 +49,20 @@ public class MatriculaService {
             Aluno aluno = alunoController.getById(matriculaDto.getIdAluno()).getBody();
 
             if (cursoClient.getTotalAlunos(curso.getId()) >= 10) {
-                throw new RuntimeException("Não pode haver mais de dez alunos matriculados.");
+                throw new NotAllowedException("Não pode haver mais de dez alunos matrículados.");
             }
             if (!curso.isAtivo()) {
-                throw new RuntimeException("O curso não está ativo e não pode ser matriculado.");
+                throw new UnableException("O curso não está ativo e o aluno não pode ser matrículado.");
             }
             if (!aluno.isAtivo()) {
-                throw new RuntimeException("O aluno não está ativo e não pode se matricular.");
+                throw new UnableException("O aluno não está ativo e não pode se matrícular.");
             }
             matricula.setIdCurso(curso.getId());
             matricula.setIdAluno(aluno.getId());
             matricula.setAtivo(true);
         }
-        catch (RuntimeException x) {
-            throw new RuntimeException("Matricula inválida.");
+        catch (InvailidException ex) {
+            throw new InvailidException("Matrícula inválida, por dados iválidos.");
         }
         matriculaRepository.save(matricula);
         cursoClient.matricular(matricula.getIdCurso());
@@ -68,15 +71,12 @@ public class MatriculaService {
     @Transactional
     public Matricula inativarMatricula(Long id) {
         Matricula matricula = buscarPorId(id);
-        matricula.setAtivo(false);
-        cursoClient.desamatricular(buscarPorId(id).getIdCurso());
+        if (matricula.isAtivo()) {
+            matricula.setAtivo(false);
+            cursoClient.desamatricular(buscarPorId(id).getIdCurso());
+        }
+        else throw new UnableException("A matrícula já está desabilitada");
         return matricula;
-    }
-
-    @Transactional
-    public void apagarMatricula(Long id) {
-        matriculaRepository.delete(buscarPorId(id));
-        cursoClient.desamatricular(buscarPorId(id).getIdCurso());
     }
 
     @Transactional
