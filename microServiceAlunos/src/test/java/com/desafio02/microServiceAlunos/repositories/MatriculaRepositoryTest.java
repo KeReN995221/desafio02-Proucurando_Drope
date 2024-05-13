@@ -1,13 +1,11 @@
 package com.desafio02.microServiceAlunos.repositories;
 
-import com.desafio02.microServiceAlunos.entities.Aluno;
 import com.desafio02.microServiceAlunos.entities.Matricula;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import static com.desafio02.microServiceAlunos.resources.AlunoConstantes.*;
 import static com.desafio02.microServiceAlunos.resources.MatriculaConstantes.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
