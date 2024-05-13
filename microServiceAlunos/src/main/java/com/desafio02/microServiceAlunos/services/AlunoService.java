@@ -6,6 +6,7 @@ import com.desafio02.microServiceAlunos.entities.Matricula;
 import com.desafio02.microServiceAlunos.exceptions.CpfUniqueViolationException;
 import com.desafio02.microServiceAlunos.exceptions.EntityNotFoundException;
 import com.desafio02.microServiceAlunos.exceptions.UnableException;
+import com.desafio02.microServiceAlunos.exceptions.UnprocessableEntityException;
 import com.desafio02.microServiceAlunos.repositories.AlunoRepository;
 import com.desafio02.microServiceAlunos.repositories.MatriculaRepository;
 import jakarta.transaction.Transactional;
@@ -30,7 +31,7 @@ public class AlunoService {
         try {
             return alunoRepository.save(aluno);
         } catch (DataIntegrityViolationException ex) {
-            throw new CpfUniqueViolationException("O cpf do aluno deve ser único");
+            throw new UnprocessableEntityException("Aluno não pode ser cadastrado");
         }
     }
 

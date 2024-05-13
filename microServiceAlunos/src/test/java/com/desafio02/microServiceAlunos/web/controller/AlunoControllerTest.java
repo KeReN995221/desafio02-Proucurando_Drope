@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.desafio02.microServiceAlunos.resources.AlunoConstantes.ALUNO;
+import static com.desafio02.microServiceAlunos.resources.AlunoConstantes.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -35,4 +35,13 @@ public class AlunoControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().json(objectMapper.writeValueAsString(ALUNO)));
     }
+
+//    @Test
+//    public void cadastrarAluno_ComDadosInvalidos_RetornarUnprocessableEntity() throws Exception {
+//        mockMvc.perform(
+//                        post("/api/v1/alunos")
+//                                .content(objectMapper.writeValueAsString(ALUNO_VAZIO))
+//                                .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isUnprocessableEntity());
+//    }
 }

@@ -2,6 +2,7 @@ package com.desafio02.microServiceAlunos.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -27,7 +28,7 @@ public class Aluno {
     @Column(name = "cpf", length = 11, unique = true)
     private String cpf;
 
-    @NotBlank
+    @NotNull
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
@@ -36,7 +37,7 @@ public class Aluno {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-    @NotBlank
+    @NotNull
     @Column(name = "ativo")
     private boolean ativo;
 
@@ -44,6 +45,4 @@ public class Aluno {
         M,
         F
     }
-
-
 }
