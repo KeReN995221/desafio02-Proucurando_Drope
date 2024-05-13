@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +33,11 @@ public class CursoController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
                     @ApiResponse(responseCode = "409", description = "Curso já cadastrado no sistema",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-                    @ApiResponse(responseCode = "400", description = "Recurso não processado por dados de entrada inválidas",
+                    @ApiResponse(responseCode = "422", description = "Recurso não processado por dados de entrada inválidas",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PostMapping
-    public ResponseEntity<Curso> criar(@RequestBody Curso curso) {
+    public ResponseEntity<Curso> criar(@RequestBody @Valid Curso curso) {
         Curso novoCurso = cursoService.salvar(curso);
         return ResponseEntity.status(201).body(novoCurso);
     }

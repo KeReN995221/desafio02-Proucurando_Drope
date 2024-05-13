@@ -9,6 +9,6 @@ public class CursoConstantes {
     public static final Curso NOVO_CURSO = new Curso(3L, "Odontologia", 350, "Marcelo Terenciane", MEDICINA, true, 3);
     public static final Curso CURSO_REPETIDO = new Curso(2L, "Odontologia", 350, "Amarildo Zotesso", MEDICINA, true, 3);
     public static final Curso CURSO_DESABILITADO = new Curso(1L, "Odontologia", 350, "Amarildo Zotesso", MEDICINA, false, 3);
-    public static final Curso CURSO_INVALIDO = new Curso();
-
+    public static final Curso CURSO_VAZIO = new Curso();
+    public static Curso CURSO_INVALIDO  = new Curso(0L,"", 0, "", null, false,0);
 }

@@ -19,7 +19,6 @@ import java.util.Optional;
 import static com.desafio02.cursos.resources.CursoConstantes.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
@@ -103,7 +102,7 @@ public class CursoServiceTest {
     @Test
     void mudarProfessor_ComDadosInvalidos_RetornarEntityNotFoundException() {
         when(cursoRepository.findById(CURSO.getId())).thenThrow(EntityNotFoundException.class);
-        assertThrows(EntityNotFoundException.class, () -> cursoService.mudarProfessor(CURSO.getId(), CURSO_INVALIDO));
+        assertThrows(EntityNotFoundException.class, () -> cursoService.mudarProfessor(CURSO.getId(), CURSO_VAZIO));
     }
 
     @Test
