@@ -11,5 +11,6 @@ public class MatriculaConstantes {  private static final LocalDate date = LocalD
     public static final MatriculaDto MATRICULADTO = new MatriculaDto(1L, 1L);
     public static final Matricula MATRCULA_INVALIDA = new Matricula(null, null, null, false);
     public static final Matricula MATRICULA_REPETIDA = new Matricula(1L, 1L, 1L, true);
+    public static final Matricula MATRICULA_VAZIA = new Matricula();
     public static final CursoDto CURSO_DTO = new CursoDto(1L, "name", "professor", true, 1);
 }

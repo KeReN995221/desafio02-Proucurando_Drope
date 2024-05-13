@@ -9,6 +9,7 @@ import lombok.*;
 @Entity
 @RequiredArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Table(name = "tb_matriculas")
 public class Matricula {
     @Id
@@ -16,11 +17,11 @@ public class Matricula {
     private Long id;
 
     @NotBlank
-    @Column(name = "id_aluno")
+    @Column(name = "id_aluno", nullable = false)
     private Long idAluno;
 
     @NotBlank
-    @Column(name = "id_curso")
+    @Column(name = "id_curso", nullable = false)
     private Long idCurso;
 
     @NotBlank
