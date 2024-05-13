@@ -1,6 +1,8 @@
 package com.desafio02.microServiceAlunos.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -18,19 +20,24 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome")
+    @NotBlank
+    @Column(name = "nome", nullable = false)
     private String nome;
 
+    @NotBlank
     @Column(name = "cpf", length = 11, unique = true)
     private String cpf;
 
-    @Column(name = "data_nascimento")
+    @NotBlank
+    @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
+    @NotBlank
     @Column(name = "sexo")
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
+    @NotBlank
     @Column(name = "ativo")
     private boolean ativo;
 
