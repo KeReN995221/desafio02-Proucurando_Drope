@@ -1,6 +1,7 @@
 package com.desafio02.cursos.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
@@ -14,13 +15,13 @@ import java.io.Serializable;
 @Table(name = "tb_curso")
 public class Curso implements Serializable {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @NotBlank
+    @Min(3)
     @Column(name = "nome", unique = true, nullable = false)
     private String nome;
 

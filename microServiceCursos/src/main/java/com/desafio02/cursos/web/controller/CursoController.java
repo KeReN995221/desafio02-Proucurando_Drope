@@ -33,16 +33,16 @@ public class CursoController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
                     @ApiResponse(responseCode = "409", description = "Curso já cadastrado no sistema",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-                    @ApiResponse(responseCode = "422", description = "Recurso não processado por dados de entrada inválidas",
+                    @ApiResponse(responseCode = "400", description = "Recurso não processado por dados de entrada inválidas",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PostMapping
-    public ResponseEntity<Curso> criar(@RequestBody @Valid Curso curso) {
+    public ResponseEntity<Curso> criar(@Valid @RequestBody Curso curso) {
         Curso novoCurso = cursoService.salvar(curso);
         return ResponseEntity.status(201).body(novoCurso);
     }
 
-    @Operation(summary = "InabilitarCurso", description = "Funcionalidade de desabilitar o curso",
+    @Operation(summary = "Inabilitar curso", description = "Funcionalidade de inabilitar um curso por id",
             responses = {
                     @ApiResponse(responseCode = "204", description = "Curso desabilitado com sucesso"),
                     @ApiResponse(responseCode = "409", description = "Curso já desabilitado",
@@ -64,8 +64,6 @@ public class CursoController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Void.class))),
                     @ApiResponse(responseCode = "404", description = "Curso não encontrado",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-                    @ApiResponse(responseCode = "400", description = "Campos inválidos ou mal formatados",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PatchMapping("/{id}")
     public ResponseEntity<ProfessorCursoDto> alterarProfessor(@PathVariable Long id , @RequestBody ProfessorCursoDto dto) {
@@ -73,7 +71,7 @@ public class CursoController {
         return ResponseEntity.status(200).build();
     }
 
-    @Operation(summary = "Recuperar um curso pelo id", description = "Funcionalidade de buscar curso pelo id",
+    @Operation(summary = "Buscar curso pelo id", description = "Funcionalidade de buscar curso pelo id",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
@@ -88,13 +86,12 @@ public class CursoController {
         return ResponseEntity.ok(curso);
     }
 
-    @Operation(summary = "Lista com todos os Cursos cadastrados",
+    @Operation(summary = "Buscar todos cursos", description = "Funcionalidade de buscar todos os curso cadastrados",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Lista com todos os cursos cadastrados",
+                    @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
-                    @ApiResponse(responseCode = "404", description = "Não há cursos cadastrados",
-                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))
-                    )
+                    @ApiResponse(responseCode = "404", description = "Nenhum curso cadastrado",
+                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             }
     )
     @GetMapping
@@ -103,17 +100,35 @@ public class CursoController {
         return ResponseEntity.ok(cursos);
     }
 
+    @Operation(summary = "Buscar total alunos por curso", description = "Funcionalidade de buscar o número total de alunos matriculados por curso",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
+            }
+    )
     @GetMapping("/total-alunos/{id}")
     public ResponseEntity<Integer> getTotalAlunos(@PathVariable Long id) {
         return ResponseEntity.ok(cursoService.buscarTotalAlunos(id));
     }
 
+    @Operation(summary = "Matricular aluno no curso", description = "Funcionalidade de aumentar o número total de alunos matriculados por curso",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
+            }
+    )
     @PostMapping("/matricular/{id}")
     public ResponseEntity<Void> matricular(@PathVariable Long id) {
         cursoService.aumentarTotalMatriculas(id);
         return ResponseEntity.status(200).build();
     }
 
+    @Operation(summary = "Desmatricular aluno no curso", description = "Funcionalidade de diminuir o número total de alunos matriculados por curso",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
+            }
+    )
     @PostMapping("/desmatricular/{id}")
     public ResponseEntity<Void> desamatricular(@PathVariable Long id) {
         cursoService.diminuirTotalMatriculas(id);

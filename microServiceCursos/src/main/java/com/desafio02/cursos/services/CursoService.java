@@ -43,7 +43,7 @@ public class CursoService {
     public Curso desabilitarCurso(Long id) {
         Curso curso = buscarPorId(id);
         if (curso.isAtivo()) curso.setAtivo(false);
-        else throw new UnableCourseException("O curso já esta desabilitado");
+        else throw new UnableCourseException("O curso já está desabilitado");
         cursoRepository.save(curso);
         return curso;
     }
