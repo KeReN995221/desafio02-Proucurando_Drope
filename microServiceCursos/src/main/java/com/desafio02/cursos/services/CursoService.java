@@ -30,9 +30,7 @@ public class CursoService {
 
     @Transactional
     public Curso mudarProfessor(Long id, Curso curso) {
-        Curso novoCurso = cursoRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Curso não encontrado")
-        );
+        Curso novoCurso = buscarPorId(id);
         novoCurso.setProfessor(curso.getProfessor());
         cursoRepository.save(novoCurso);
         return novoCurso;
@@ -40,9 +38,7 @@ public class CursoService {
 
     @Transactional
     public Curso desabilitarCurso(Long id) {
-        Curso curso = cursoRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Curso não encontrado")
-        );
+        Curso curso = buscarPorId(id);
         if (curso.isAtivo()) curso.setAtivo(false);
         else throw new UnableCourseException("O curso já esta desabilitado");
         cursoRepository.save(curso);
@@ -67,9 +63,7 @@ public class CursoService {
 
     @Transactional(readOnly = true)
     public Integer buscarTotalAlunos(Long id) {
-        Curso curso = cursoRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(String.format("Curso não encontrado", id))
-        );
+        Curso curso = buscarPorId(id);
         return curso.getTotalAlunos();
     }
 
