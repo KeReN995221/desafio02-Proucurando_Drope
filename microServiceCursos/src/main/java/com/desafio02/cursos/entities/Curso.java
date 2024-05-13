@@ -1,6 +1,8 @@
 package com.desafio02.cursos.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.io.Serializable;
@@ -12,27 +14,34 @@ import java.io.Serializable;
 @Table(name = "tb_curso")
 public class Curso implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome", unique = true)
+    @NotBlank
+    @Column(name = "nome", unique = true, nullable = false)
     private String nome;
 
+    @NotBlank
     @Column(name = "quantidade_horas")
     private int quantidadeHoras;
 
+    @NotBlank
     @Column(name = "professor")
     private String professor;
 
+    @NotBlank
     @Column(name = "area_conhecimento")
     @Enumerated(EnumType.STRING)
     private AreaDoConhecimento areaConhecimento;
 
+    @NotBlank
     @Column(name = "ativo")
     private boolean ativo;
 
+    @NotBlank
     @Column(name = "total_alunos")
     private Integer totalAlunos;
 

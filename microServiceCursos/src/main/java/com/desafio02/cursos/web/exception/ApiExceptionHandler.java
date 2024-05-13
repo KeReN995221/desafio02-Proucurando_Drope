@@ -1,6 +1,7 @@
 package com.desafio02.cursos.web.exception;
 
 import com.desafio02.cursos.excpetions.EntityNotFoundException;
+import com.desafio02.cursos.excpetions.InvalidCourseException;
 import com.desafio02.cursos.excpetions.NameUniqueViolationException;
 import com.desafio02.cursos.excpetions.UnableCourseException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,5 +45,15 @@ public class ApiExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorMessage(request, HttpStatus.BAD_REQUEST, ex.getMessage()));
+    }
+
+    @ExceptionHandler(InvalidCourseException.class)
+    public ResponseEntity<ErrorMessage> invalidCourseException(RuntimeException ex,
+                                                        HttpServletRequest request) {
+        log.error("Api Error - "+ex);
+        return ResponseEntity
+                .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage()));
     }
 }

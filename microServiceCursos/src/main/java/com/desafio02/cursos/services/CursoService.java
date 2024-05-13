@@ -2,6 +2,7 @@ package com.desafio02.cursos.services;
 
 import com.desafio02.cursos.entities.Curso;
 import com.desafio02.cursos.excpetions.EntityNotFoundException;
+import com.desafio02.cursos.excpetions.InvalidCourseException;
 import com.desafio02.cursos.excpetions.NameUniqueViolationException;
 import com.desafio02.cursos.excpetions.UnableCourseException;
 import com.desafio02.cursos.repositories.CursoRepository;
@@ -25,6 +26,8 @@ public class CursoService {
             return cursoRepository.save(curso);
         } catch (DataIntegrityViolationException ex) {
             throw new NameUniqueViolationException("O nome do curso deve ser único");
+        } catch (RuntimeException ex) {
+            throw new InvalidCourseException("Cursos inválido");
         }
     }
 
