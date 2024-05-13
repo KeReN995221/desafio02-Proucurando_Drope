@@ -62,7 +62,7 @@ public class MatriculaService {
             matricula.setIdAluno(aluno.getId());
             matricula.setAtivo(true);
         }
-        catch (InvailidException ex) {
+        catch (RuntimeException ex) {
             throw new UnprocessableEntityException("Matrícula inválida, por dados iválidos.");
         }
         matriculaRepository.save(matricula);

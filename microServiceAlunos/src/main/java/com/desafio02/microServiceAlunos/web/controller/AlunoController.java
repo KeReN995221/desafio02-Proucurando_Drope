@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +16,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Alunos", description = "Contém as funcionalidades do micro serviço")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("api/v1/alunos")
 public class AlunoController {
     private final AlunoService alunoService;
 
-    @Operation(summary = "Recuperar um aluno pelo id",
+    @Operation(summary = "Recuperar aluno pelo id", description = "Funcionalidades para criar um novo aluno",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Aluno.class))),
@@ -36,14 +38,12 @@ public class AlunoController {
         return ResponseEntity.ok(aluno);
     }
 
-    @Operation(summary = "Criar um novo aluno",
+    @Operation(summary = "Criar aluno", description = "Funcionalidades para criar um novo aluno",
             responses = {
                     @ApiResponse(responseCode = "201", description = "Recurso criado com sucesso",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Aluno.class))),
-                    @ApiResponse(responseCode = "422", description = "Aluno nao pode ser cadastrado",
-                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-                    @ApiResponse(responseCode = "400", description = "campos inválidos",
-                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
+                    @ApiResponse(responseCode = "409", description = "CPF já cadastrado para um aluno",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             }
     )
     @PostMapping
@@ -52,16 +52,13 @@ public class AlunoController {
         return ResponseEntity.status(201).body(aluno);
     }
 
-    @Operation(summary = "Desativar status ativo de aluno",
+    @Operation(summary = "Inabilitar aluno", description = "Funcionalidade de inabilitar um aluno por id",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Aluno Inabilitado com sucesso",
+                    @ApiResponse(responseCode = "200", description = "Aluno inabilitado com sucesso",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation =  Aluno.class))),
-                    @ApiResponse(responseCode = "404", description = "recursos não encontrado",
-                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))
-                    ),
-                    @ApiResponse(responseCode = "409", description = "Aluno  já inabilitado",
-                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
-                    ,@ApiResponse(responseCode = "400", description = "pedido mal formatado",
+                    @ApiResponse(responseCode = "404", description = "Aluno não encontrado",
+                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
+                    @ApiResponse(responseCode = "400", description = "O aluno já está inabilitado",
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             }
     )
@@ -71,13 +68,12 @@ public class AlunoController {
         return ResponseEntity.ok().body(alunoInabilitado);
     }
 
-    @Operation(summary = "Lista com todos os Alunos cadastrados",
+    @Operation(summary = "Buscar todos alunos", description = "Funcionalidade de buscar todos os alunos cadastrados",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Lista com todos os alunos cadastrados",
+                    @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Aluno.class))),
-                    @ApiResponse(responseCode = "404", description = "não há alunos cadastrados",
-                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))
-                    )
+                    @ApiResponse(responseCode = "404", description = "Não há alunos cadastrados",
+                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             }
     )
     @GetMapping

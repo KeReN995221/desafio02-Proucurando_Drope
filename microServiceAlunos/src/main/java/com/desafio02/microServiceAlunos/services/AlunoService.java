@@ -31,7 +31,7 @@ public class AlunoService {
         try {
             return alunoRepository.save(aluno);
         } catch (DataIntegrityViolationException ex) {
-            throw new UnprocessableEntityException("Aluno não pode ser cadastrado");
+            throw new CpfUniqueViolationException("Aluno não pode ser cadastrado pois já existe um CPF cadastrado");
         }
     }
 
