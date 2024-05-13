@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,14 +40,14 @@ public class AlunoController {
             responses = {
                     @ApiResponse(responseCode = "201", description = "Recurso criado com sucesso",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Aluno.class))),
-                    @ApiResponse(responseCode = "409", description = "Aluno com cpf já cadastrado",
+                    @ApiResponse(responseCode = "422", description = "Aluno nao pode ser cadastrado",
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
                     @ApiResponse(responseCode = "400", description = "campos inválidos",
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             }
     )
     @PostMapping
-    public ResponseEntity<Aluno> cadastrarAluno(@RequestBody Aluno aluno) {
+    public ResponseEntity<Aluno> cadastrarAluno(@Valid @RequestBody Aluno aluno) {
         alunoService.salvar(aluno);
         return ResponseEntity.status(201).body(aluno);
     }

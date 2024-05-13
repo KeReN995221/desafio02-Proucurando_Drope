@@ -1,6 +1,7 @@
 package com.desafio02.microServiceAlunos.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter
@@ -8,18 +9,22 @@ import lombok.*;
 @Entity
 @RequiredArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Table(name = "tb_matriculas")
 public class Matricula {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_aluno")
+    @NotBlank
+    @Column(name = "id_aluno", nullable = false)
     private Long idAluno;
 
-    @Column(name = "id_curso")
+    @NotBlank
+    @Column(name = "id_curso", nullable = false)
     private Long idCurso;
 
+    @NotBlank
     @Column(name = "ativo")
     private boolean ativo;
 }

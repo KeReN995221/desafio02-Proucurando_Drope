@@ -6,6 +6,7 @@ import com.desafio02.microServiceAlunos.entities.Matricula;
 import com.desafio02.microServiceAlunos.exceptions.InvailidException;
 import com.desafio02.microServiceAlunos.exceptions.NotAllowedException;
 import com.desafio02.microServiceAlunos.exceptions.UnableException;
+import com.desafio02.microServiceAlunos.exceptions.UnprocessableEntityException;
 import com.desafio02.microServiceAlunos.repositories.AlunoRepository;
 import com.desafio02.microServiceAlunos.repositories.MatriculaRepository;
 import com.desafio02.microServiceAlunos.web.controller.AlunoController;
@@ -62,7 +63,7 @@ public class MatriculaService {
             matricula.setAtivo(true);
         }
         catch (InvailidException ex) {
-            throw new InvailidException("Matrícula inválida, por dados iválidos.");
+            throw new UnprocessableEntityException("Matrícula inválida, por dados iválidos.");
         }
         matriculaRepository.save(matricula);
         cursoClient.matricular(matricula.getIdCurso());
