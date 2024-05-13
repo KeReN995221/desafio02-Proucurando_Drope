@@ -1,5 +1,6 @@
 package com.desafio02.microServiceAlunos.web.controller;
 
+import com.desafio02.microServiceAlunos.exceptions.UnprocessableEntityException;
 import com.desafio02.microServiceAlunos.services.MatriculaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -9,8 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.desafio02.microServiceAlunos.resources.MatriculaConstantes.MATRICULA;
-import static com.desafio02.microServiceAlunos.resources.MatriculaConstantes.MATRICULA_DTO;
+import static com.desafio02.microServiceAlunos.resources.MatriculaConstantes.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

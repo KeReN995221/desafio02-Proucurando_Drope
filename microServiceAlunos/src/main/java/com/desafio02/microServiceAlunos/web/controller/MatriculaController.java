@@ -4,6 +4,7 @@ import com.desafio02.microServiceAlunos.entities.Matricula;
 import com.desafio02.microServiceAlunos.services.MatriculaService;
 import com.desafio02.microServiceAlunos.web.dto.ListaAlunosDeCursoDto;
 import com.desafio02.microServiceAlunos.web.dto.MatriculaDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class MatriculaController {
     }
 
     @PostMapping
-    public ResponseEntity<Matricula> matricularAluno(@RequestBody MatriculaDto matriculaDto) {
+    public ResponseEntity<Matricula> matricularAluno(@RequestBody @Valid MatriculaDto matriculaDto) {
         Matricula matricula = matriculaService.salvar(matriculaDto);
         return ResponseEntity.status(201).body(matricula);
     }

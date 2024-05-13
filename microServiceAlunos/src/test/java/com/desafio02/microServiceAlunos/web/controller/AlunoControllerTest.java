@@ -1,5 +1,6 @@
 package com.desafio02.microServiceAlunos.web.controller;
 
+import com.desafio02.microServiceAlunos.exceptions.UnprocessableEntityException;
 import com.desafio02.microServiceAlunos.services.AlunoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -36,12 +37,19 @@ public class AlunoControllerTest {
                 .andExpect(content().json(objectMapper.writeValueAsString(ALUNO)));
     }
 
-//    @Test
-//    public void cadastrarAluno_ComDadosInvalidos_RetornarUnprocessableEntity() throws Exception {
-//        mockMvc.perform(
-//                        post("/api/v1/alunos")
-//                                .content(objectMapper.writeValueAsString(ALUNO_VAZIO))
-//                                .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isUnprocessableEntity());
-//    }
+    @Test
+    public void cadastrarAluno_ComDadosInvalidos_RetornarUnprocessableEntity() throws Exception {
+        when(alunoService.salvar(ALUNO_VAZIO)).thenThrow(new UnprocessableEntityException(""));
+        when(alunoService.salvar(ALUNO_INVALIDO)).thenThrow(new UnprocessableEntityException(""));
+        mockMvc.perform(
+                        post("/api/v1/alunos")
+                                .content(objectMapper.writeValueAsString(ALUNO_VAZIO))
+                                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnprocessableEntity());
+        mockMvc.perform(
+                        post("/api/v1/alunos")
+                                .content(objectMapper.writeValueAsString(ALUNO_INVALIDO))
+                                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnprocessableEntity());
+    }
 }
