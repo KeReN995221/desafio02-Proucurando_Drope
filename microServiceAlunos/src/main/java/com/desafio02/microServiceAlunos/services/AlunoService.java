@@ -57,7 +57,7 @@ public class AlunoService {
         if (aluno.isAtivo()) {
             aluno.setAtivo(false);
         }
-        else throw new UnableException("O aluno já esta desabilitado");
+        else throw new UnableException("O aluno já esta inabilitado");
 
         List<Matricula> matriculaLista = buscarMatriculasPorAluno(id);
         for(Matricula matricula : matriculaLista){

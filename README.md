@@ -17,10 +17,15 @@ Neste desafio, vamos construir dois microsserviços cruciais para uma plataforma
    * Alterar professor de um curso já cadastrado.
 
 2. **Microsserviço de Gestão de Alunos e Matrículas:**
-   * Cadastrar alunos.
-   * Matricular alunos a determinados cursos.
-   * Inativar a matrícula de um aluno a curso.
-   * Consultar alunos matriculados em um curso.
+    * Cadastrar alunos.
+    * Matricular alunos a determinados cursos.
+    * Inativar a matrícula de um aluno a curso.
+    * Consultar alunos matriculados em um curso.
+    * Inativar um aluno.
+    * Cadastrar alunos.
+    * Matricular alunos a determinados cursos.
+    * Inativar a matrícula de um aluno a curso.
+    * Consultar alunos matriculados em um curso.
 
 ### Branches
 
