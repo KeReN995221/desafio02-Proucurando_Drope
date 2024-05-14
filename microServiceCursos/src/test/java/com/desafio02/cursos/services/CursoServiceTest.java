@@ -10,12 +10,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import static com.desafio02.cursos.resources.CursoConstantes.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -148,7 +145,4 @@ public class CursoServiceTest {
         doThrow(new EntityNotFoundException("")).when(cursoRepository).findById(0L);
         assertThatThrownBy(() -> cursoService.diminuirTotalMatriculas(0L)).isInstanceOf(EntityNotFoundException.class);
     }
-
-
-
 }

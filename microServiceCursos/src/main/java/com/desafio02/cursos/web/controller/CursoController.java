@@ -10,13 +10,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Tag(name = "Cursos", description = "Contém as funcionalidades do micro serviço")
@@ -78,8 +76,7 @@ public class CursoController {
                     @ApiResponse(responseCode = "404", description = "Recursos não encontrado",
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
 
-            }
-    )
+            })
     @GetMapping("/{id}")
     public ResponseEntity<Curso> getById(@PathVariable Long id) {
         Curso curso = cursoService.buscarPorId(id);
@@ -92,8 +89,7 @@ public class CursoController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
                     @ApiResponse(responseCode = "404", description = "Nenhum curso cadastrado",
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
-            }
-    )
+            })
     @GetMapping
     public ResponseEntity<List<Curso>> getAll() {
         List<Curso> cursos = cursoService.buscarTodos();
@@ -104,8 +100,7 @@ public class CursoController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
-            }
-    )
+            })
     @GetMapping("/total-alunos/{id}")
     public ResponseEntity<Integer> getTotalAlunos(@PathVariable Long id) {
         return ResponseEntity.ok(cursoService.buscarTotalAlunos(id));
@@ -115,8 +110,7 @@ public class CursoController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
-            }
-    )
+            })
     @PostMapping("/matricular/{id}")
     public ResponseEntity<Void> matricular(@PathVariable Long id) {
         cursoService.aumentarTotalMatriculas(id);
@@ -127,8 +121,7 @@ public class CursoController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
-            }
-    )
+            })
     @PostMapping("/desmatricular/{id}")
     public ResponseEntity<Void> desamatricular(@PathVariable Long id) {
         cursoService.diminuirTotalMatriculas(id);
