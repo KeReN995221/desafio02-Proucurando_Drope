@@ -3,8 +3,7 @@ package com.desafio02.microServiceAlunos.web.dto;
 import com.desafio02.microServiceAlunos.entities.Aluno;
 import lombok.*;
 
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode

@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor
+@Setter @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CursoDto {
         private Long id;
         private String nome;
