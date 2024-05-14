@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
 import static com.desafio02.cursos.resources.CursoConstantes.*;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
@@ -20,8 +19,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+
 @WebMvcTest(CursoController.class)
 public class CursoControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -44,12 +45,10 @@ public class CursoControllerTest {
     @Test
     void criarCurso_ComDadosInvalidos_RetornarErroComStatus400() throws Exception {
         when(cursoService.salvar(CURSO_INVALIDO)).thenThrow(new InvalidCourseException(""));
-
         mockMvc.perform(post("/api/v1/cursos")
                         .content(objectMapper.writeValueAsString(CURSO_INVALIDO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
-
     }
 
     @Test
@@ -61,7 +60,6 @@ public class CursoControllerTest {
                 .andExpect(status().isConflict());
     }
 
-
     @Test
     void buscarCurso_ComIdValido_RetornarCursoComStatus200 () throws Exception {
         when(cursoService.buscarPorId(1L)).thenReturn(CURSO);
@@ -71,7 +69,6 @@ public class CursoControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value(CURSO));
     }
-
 
     @Test
     void buscarCurso_ComIdInvalido_RetornarErroComStatu404 () throws Exception {
@@ -91,5 +88,4 @@ public class CursoControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)));
     }
-
 }

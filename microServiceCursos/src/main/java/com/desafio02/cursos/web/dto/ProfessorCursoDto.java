@@ -2,10 +2,8 @@ package com.desafio02.cursos.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.springframework.lang.NonNull;
 
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
