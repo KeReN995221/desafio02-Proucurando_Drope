@@ -12,9 +12,9 @@
 Neste desafio, vamos construir dois microsserviços cruciais para uma plataforma de ensino:
 
 1. **Microsserviço de Gestão de Cursos:**
-    * Cadastrar curso.
-    * Inabilitar curso .
-    * Alterar professor de um curso já cadastrado.
+   * Cadastrar curso.
+   * Inabilitar curso .
+   * Alterar professor de um curso já cadastrado.
 
 2. **Microsserviço de Gestão de Alunos e Matrículas:**
     * Cadastrar alunos.
@@ -22,6 +22,10 @@ Neste desafio, vamos construir dois microsserviços cruciais para uma plataforma
     * Inativar a matrícula de um aluno a curso.
     * Consultar alunos matriculados em um curso.
     * Inativar um aluno.
+    * Cadastrar alunos.
+    * Matricular alunos a determinados cursos.
+    * Inativar a matrícula de um aluno a curso.
+    * Consultar alunos matriculados em um curso.
 
 ### Branches
 
@@ -38,3 +42,30 @@ Neste desafio, vamos construir dois microsserviços cruciais para uma plataforma
 * **refactor:** Reorganização do código sem afetar funcionalidades ou corrigir bugs.
 * **style:** Formatação e organização do código (espaços em branco, etc.).
 * **test:** Adição ou correção de testes.
+
+## EndPoints MicroServiceCursos
+### CURSOS
+
+[POST] api/v1/cursos (Criar um curso)     
+[GET] api/v1/cursos (Recuperar todos os cursos)       
+[GET] api/v1/cursos/{id} (Buscar curso)
+[PATCH] api/v1/cursos/desabilitar-curso/{id} (inabilitar um curso)    
+[PATCH] api/v1/cursos/{id} (Alterar professor)      
+[POST] api/v1/cursos/total-alunos/{id} ()
+
+### EndPoints suportes para OpenFeign
+[POST] api/v1/cursos/matricular/{id} (Quantidade do total de alunos +1)
+[POST] api/v1/cursos/desmatricular/{id} (Quantidade do total de alunos -1)
+
+## EndPoints MicroServiceAlunos
+### ALUNOS
+[POST] api/v1/alunos (Criar um alunos)    
+[GET] api/v1/alunos (Recuperar todos os alunos)       
+[GET] api/v1/alunos/{id} (Buscar alunos)         
+[PATCH] api/v1/alunos/inativar-aluno/{id} (Inativar aluno)
+### MATRICULAS
+[POST] api/v1/matriculas (Criar uma matricula)
+[GET] api/v1/matriculas/{id} (Buscar matricula)         
+[GET] api/v1/matriculas/curso/{id} (Buscar matriculas de um curso)          
+[PATCH] api/v1/matriculas/inativar-matricula/{id} (Inativar matricula)    
+
