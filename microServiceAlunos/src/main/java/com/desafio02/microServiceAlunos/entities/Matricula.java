@@ -1,7 +1,7 @@
 package com.desafio02.microServiceAlunos.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -16,15 +16,15 @@ public class Matricula {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotNull
     @Column(name = "id_aluno", nullable = false)
     private Long idAluno;
 
-    @NotBlank
+    @NotNull
     @Column(name = "id_curso", nullable = false)
     private Long idCurso;
 
-    @NotBlank
+    @NotNull
     @Column(name = "ativo")
     private boolean ativo;
 }

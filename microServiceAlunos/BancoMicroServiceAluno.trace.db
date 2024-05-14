@@ -1,0 +1,9 @@
+2024-05-13 23:59:27.718718-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "Delete tb_aluno whre [*]id=7"; SQL statement:
+Delete tb_aluno whre id=7 [42000-224]
+2024-05-13 23:59:41.903280-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "Delete tb_aluno whre [*]ID=7"; SQL statement:
+Delete tb_aluno whre ID=7 [42000-224]
+2024-05-13 23:59:52.353069-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "Delete TB_ALUNO whre [*]ID=7"; SQL statement:
+Delete TB_ALUNO whre ID=7 [42000-224]
