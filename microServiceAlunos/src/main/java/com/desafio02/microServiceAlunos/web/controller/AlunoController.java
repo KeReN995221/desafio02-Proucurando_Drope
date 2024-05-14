@@ -12,8 +12,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.List;
 
 @Tag(name = "Alunos", description = "Contém as funcionalidades do micro serviço")
@@ -30,8 +28,7 @@ public class AlunoController {
                     @ApiResponse(responseCode = "404", description = "recursos não encontrado",
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
 
-            }
-    )
+            })
     @GetMapping("/{id}")
     public ResponseEntity<Aluno> getById(@PathVariable Long id) {
         Aluno aluno = alunoService.buscarPorId(id);
@@ -44,8 +41,7 @@ public class AlunoController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Aluno.class))),
                     @ApiResponse(responseCode = "409", description = "CPF já cadastrado para um aluno",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
-            }
-    )
+            })
     @PostMapping
     public ResponseEntity<Aluno> cadastrarAluno(@Valid @RequestBody Aluno aluno) {
         alunoService.salvar(aluno);
@@ -60,8 +56,7 @@ public class AlunoController {
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
                     @ApiResponse(responseCode = "400", description = "O aluno já está inabilitado",
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
-            }
-    )
+            })
     @PatchMapping("/inativar-aluno/{id}")
     public ResponseEntity<Aluno> inativarAluno(@PathVariable  Long id) {
         Aluno alunoInabilitado = alunoService.inabilitarAluno(id);
@@ -74,8 +69,7 @@ public class AlunoController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Aluno.class))),
                     @ApiResponse(responseCode = "404", description = "Não há alunos cadastrados",
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
-            }
-    )
+            })
     @GetMapping
     public ResponseEntity<List<Aluno>> getAll() {
         List<Aluno> alunos = alunoService.buscarTodos();

@@ -5,7 +5,6 @@ import com.desafio02.microServiceAlunos.entities.Aluno;
 import com.desafio02.microServiceAlunos.entities.Matricula;
 import com.desafio02.microServiceAlunos.exceptions.NotAllowedException;
 import com.desafio02.microServiceAlunos.exceptions.UnableException;
-import com.desafio02.microServiceAlunos.exceptions.UnprocessableEntityException;
 import com.desafio02.microServiceAlunos.repositories.AlunoRepository;
 import com.desafio02.microServiceAlunos.repositories.MatriculaRepository;
 import com.desafio02.microServiceAlunos.web.controller.AlunoController;
@@ -16,10 +15,8 @@ import com.desafio02.microServiceAlunos.web.dto.mapper.AlunoMapper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 

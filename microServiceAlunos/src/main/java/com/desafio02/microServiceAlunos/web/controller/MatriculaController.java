@@ -29,8 +29,7 @@ public class MatriculaController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Matricula.class))),
                     @ApiResponse(responseCode = "404", description = "Recurso não encontrado",
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-            }
-    )
+            })
     @GetMapping("/{id}")
     public ResponseEntity<Matricula> getById(@PathVariable Long id) {
         Matricula matricula = matriculaService.buscarPorId(id);
@@ -41,8 +40,7 @@ public class MatriculaController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Matricula.class))),
-            }
-    )
+            })
     @GetMapping("/curso/{id}")
     public ResponseEntity<ListaAlunosDeCursoDto> GetAllMatriculasFromCursoId(@PathVariable Long id) {
         ListaAlunosDeCursoDto alunos = matriculaService.buscarAlunosPorCurso(id);
@@ -63,8 +61,7 @@ public class MatriculaController {
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
                     @ApiResponse(responseCode = "422", description = "Matrícula inválida, por dados iválidos.",
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
-            }
-    )
+            })
     @PostMapping
     public ResponseEntity<Matricula> matricularAluno(@RequestBody @Valid MatriculaDto matriculaDto) {
         Matricula matricula = matriculaService.salvar(matriculaDto);
@@ -79,8 +76,7 @@ public class MatriculaController {
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
                     @ApiResponse(responseCode = "400", description = "A matrícula já está inabilitada",
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
-            }
-    )
+            })
     @PatchMapping("/inativar-matricula/{id}")
     public ResponseEntity<Matricula> inativarmatricula(@PathVariable  Long id) {
         Matricula matriculainabilitada = matriculaService.inativarMatricula(id);

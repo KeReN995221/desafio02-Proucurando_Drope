@@ -13,18 +13,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class AlunoService {
-    private final AlunoRepository alunoRepository;
-    private final MatriculaRepository matriculaRepository;
+
     @Autowired
     private final CursoClient cursoClient;
+    private final AlunoRepository alunoRepository;
+    private final MatriculaRepository matriculaRepository;
 
     @Transactional
     public Aluno salvar(Aluno aluno) {
