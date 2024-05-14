@@ -24,7 +24,7 @@ public class Aluno {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @NotBlank
+    @NotNull
     @Column(name = "cpf", length = 11, unique = true)
     private String cpf;
 
@@ -32,7 +32,6 @@ public class Aluno {
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
-    @NotBlank
     @Column(name = "sexo")
     @Enumerated(EnumType.STRING)
     private Sexo sexo;

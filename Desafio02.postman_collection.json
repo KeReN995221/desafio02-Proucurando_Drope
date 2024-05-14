@@ -228,7 +228,7 @@
 							"response": []
 						},
 						{
-							"name": "inativar matrícula",
+							"name": "inabilitar matrícula",
 							"request": {
 								"method": "PATCH",
 								"header": [],
@@ -267,112 +267,117 @@
 					]
 				},
 				{
-					"name": "criar aluno",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Dori\",\r\n    \"cpf\": \"55555555555\",\r\n    \"dataNascimento\": \"1995-09-27\",\r\n    \"sexo\": \"F\",\r\n    \"ativo\": true\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Aluno",
+					"item": [
+						{
+							"name": "criar aluno",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Dori\",\r\n    \"cpf\": \"55555555555\",\r\n    \"dataNascimento\": \"1995-09-27\",\r\n    \"sexo\": \"F\",\r\n    \"ativo\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/v1/alunos",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"alunos"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://127.0.0.1:8080/api/v1/alunos",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"alunos"
-							]
+						{
+							"name": "buscar aluno por id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/v1/alunos/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"alunos",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "buscar todos alunos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/v1/alunos",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"alunos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "inabilitar aluno",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/v1/alunos/inativar-aluno/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"alunos",
+										"inativar-aluno",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "buscar aluno por id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8080/api/v1/alunos/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"alunos",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "buscar todos alunos",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8080/api/v1/alunos",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"alunos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "inabilitar aluno",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8080/api/v1/alunos/inativar-aluno/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"alunos",
-								"inativar-aluno",
-								"1"
-							]
-						}
-					},
-					"response": []
+					]
 				}
 			]
 		}

@@ -3,7 +3,6 @@ package com.desafio02.microServiceAlunos.services;
 import com.desafio02.microServiceAlunos.client.CursoClient;
 import com.desafio02.microServiceAlunos.entities.Aluno;
 import com.desafio02.microServiceAlunos.entities.Matricula;
-import com.desafio02.microServiceAlunos.exceptions.InvailidException;
 import com.desafio02.microServiceAlunos.exceptions.NotAllowedException;
 import com.desafio02.microServiceAlunos.exceptions.UnableException;
 import com.desafio02.microServiceAlunos.exceptions.UnprocessableEntityException;
@@ -61,13 +60,13 @@ public class MatriculaService {
             matricula.setIdCurso(curso.getId());
             matricula.setIdAluno(aluno.getId());
             matricula.setAtivo(true);
+            matriculaRepository.save(matricula);
+            cursoClient.matricular(matricula.getIdCurso());
+            return matricula;
         }
         catch (RuntimeException ex) {
             throw new UnprocessableEntityException("Matrícula inválida, por dados iválidos.");
         }
-        matriculaRepository.save(matricula);
-        cursoClient.matricular(matricula.getIdCurso());
-        return matricula;
     }
 
     @Transactional
