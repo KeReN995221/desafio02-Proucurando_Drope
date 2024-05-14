@@ -30,7 +30,7 @@ public class Curso implements Serializable {
     @Column(name = "quantidade_horas")
     private int quantidadeHoras;
 
-    @NotBlank
+    @NotBlank (message = "Nome do Professor é obrigatório")
     @Column(name = "professor")
     private String professor;
 
