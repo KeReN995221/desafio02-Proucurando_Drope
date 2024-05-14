@@ -35,38 +35,32 @@ public class MatriculaService {
     private AlunoController alunoController;
 
     @Transactional
-    public Matricula buscarPorId(Long id) {
-        return matriculaRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(String.format("Matrícula id=%s não encontrada", id))
-        );
-    }
-
-    @Transactional
     public Matricula salvar (MatriculaDto matriculaDto) {
-        Matricula matricula = new Matricula();
-        try {
-            CursoDto curso = cursoClient.getCursoById(matriculaDto.getIdCurso());
-            Aluno aluno = alunoController.getById(matriculaDto.getIdAluno()).getBody();
-
+        CursoDto curso = cursoClient.getCursoById(matriculaDto.getIdCurso());
+        Aluno aluno = alunoController.getById(matriculaDto.getIdAluno()).getBody();
             if (cursoClient.getTotalAlunos(curso.getId()) >= 10) {
                 throw new NotAllowedException("Não pode haver mais de dez alunos matrículados.");
             }
             if (!curso.isAtivo()) {
-                throw new UnableException("O curso não está ativo e o aluno não pode ser matrículado.");
+                throw new UnableException("O curso não está ativo.");
             }
             if (!aluno.isAtivo()) {
-                throw new UnableException("O aluno não está ativo e não pode se matrícular.");
+                throw new UnableException("O aluno não está ativo.");
             }
-            matricula.setIdCurso(curso.getId());
-            matricula.setIdAluno(aluno.getId());
-            matricula.setAtivo(true);
-            matriculaRepository.save(matricula);
-            cursoClient.matricular(matricula.getIdCurso());
-            return matricula;
-        }
-        catch (RuntimeException ex) {
-            throw new UnprocessableEntityException("Matrícula inválida, por dados iválidos.");
-        }
+        Matricula matricula = new Matricula();
+        matricula.setIdCurso(curso.getId());
+        matricula.setIdAluno(aluno.getId());
+        matricula.setAtivo(true);
+        matriculaRepository.save(matricula);
+        cursoClient.matricular(matricula.getIdCurso());
+        return matricula;
+    }
+
+    @Transactional
+    public Matricula buscarPorId(Long id) {
+        return matriculaRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Matrícula id=%s não encontrada", id))
+        );
     }
 
     @Transactional

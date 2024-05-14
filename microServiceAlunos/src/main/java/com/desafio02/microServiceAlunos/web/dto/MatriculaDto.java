@@ -1,4 +1,5 @@
 package com.desafio02.microServiceAlunos.web.dto;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.lang.NonNull;
 
@@ -8,10 +9,9 @@ import org.springframework.lang.NonNull;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class MatriculaDto {
-    @NonNull
+    @NotNull
     Long idAluno;
 
-    @NonNull
+    @NotNull
     Long idCurso;
-
 }
