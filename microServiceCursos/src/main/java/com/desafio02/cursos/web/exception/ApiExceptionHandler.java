@@ -1,14 +1,12 @@
 package com.desafio02.cursos.web.exception;
 
-import com.desafio02.cursos.excpetions.EntityNotFoundException;
-import com.desafio02.cursos.excpetions.InvalidCourseException;
-import com.desafio02.cursos.excpetions.NameUniqueViolationException;
-import com.desafio02.cursos.excpetions.UnableCourseException;
+import com.desafio02.cursos.excpetions.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

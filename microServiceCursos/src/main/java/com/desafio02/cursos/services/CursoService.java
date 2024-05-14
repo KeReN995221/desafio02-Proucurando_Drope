@@ -1,11 +1,9 @@
 package com.desafio02.cursos.services;
 
 import com.desafio02.cursos.entities.Curso;
-import com.desafio02.cursos.excpetions.EntityNotFoundException;
-import com.desafio02.cursos.excpetions.InvalidCourseException;
-import com.desafio02.cursos.excpetions.NameUniqueViolationException;
-import com.desafio02.cursos.excpetions.UnableCourseException;
+import com.desafio02.cursos.excpetions.*;
 import com.desafio02.cursos.repositories.CursoRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -19,15 +17,19 @@ public class CursoService {
 
     private final CursoRepository cursoRepository;
 
+    @Transactional(readOnly = true)
+    public Curso buscarPorId(Long id) {
+        return cursoRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Curso não encontrado")));
+    }
+
     @Transactional
-    public Curso salvar(Curso curso) {
+    public Curso salvar(@Valid Curso curso) {
         try {
             curso.setTotalAlunos(0);
             return cursoRepository.save(curso);
         } catch (DataIntegrityViolationException ex) {
             throw new NameUniqueViolationException("O nome do curso deve ser único");
-        } catch (RuntimeException ex) {
-            throw new InvalidCourseException("Cursos inválido");
         }
     }
 
@@ -46,13 +48,6 @@ public class CursoService {
         else throw new UnableCourseException("O curso já está desabilitado");
         cursoRepository.save(curso);
         return curso;
-    }
-
-    @Transactional(readOnly = true)
-    public Curso buscarPorId(Long id) {
-        return cursoRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(String.format("Curso não encontrado", id))
-        );
     }
 
     @Transactional(readOnly = true)

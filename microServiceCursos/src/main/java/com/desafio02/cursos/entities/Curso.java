@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
@@ -20,12 +21,12 @@ public class Curso implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @NotBlank
-    @Min(3)
+    @NotBlank (message = "Nome é obrigatório")
+    @NonNull
     @Column(name = "nome", unique = true, nullable = false)
     private String nome;
 
-    @NotBlank
+    @NotNull
     @Column(name = "quantidade_horas")
     private int quantidadeHoras;
 
@@ -33,16 +34,14 @@ public class Curso implements Serializable {
     @Column(name = "professor")
     private String professor;
 
-    @NotBlank
     @Column(name = "area_conhecimento")
     @Enumerated(EnumType.STRING)
     private AreaDoConhecimento areaConhecimento;
 
-    @NotBlank
+    @NotNull
     @Column(name = "ativo")
     private boolean ativo;
 
-    @NotBlank
     @Column(name = "total_alunos")
     private Integer totalAlunos;
 

@@ -21,6 +21,7 @@ Neste desafio, vamos construir dois microsserviços cruciais para uma plataforma
     * Matricular alunos a determinados cursos.
     * Inativar a matrícula de um aluno a curso.
     * Consultar alunos matriculados em um curso.
+    * Inativar um aluno.
 
 ### Branches
 

@@ -1,5 +1,6 @@
 package com.desafio02.cursos.web.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.lang.NonNull;
 
@@ -10,6 +11,6 @@ import org.springframework.lang.NonNull;
 @EqualsAndHashCode
 public class ProfessorCursoDto {
 
-    @NonNull
+    @NotBlank
     String professor;
 }

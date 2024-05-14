@@ -33,11 +33,11 @@ public class CursoController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Curso.class))),
                     @ApiResponse(responseCode = "409", description = "Curso já cadastrado no sistema",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-                    @ApiResponse(responseCode = "400", description = "Recurso não processado por dados de entrada inválidas",
+                    @ApiResponse(responseCode = "400", description = "Recurso não processado por dados de entrada inválidos",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PostMapping
-    public ResponseEntity<Curso> criar(@Valid @RequestBody Curso curso) {
+    public ResponseEntity<Curso> criar(@RequestBody @Valid Curso curso) {
         Curso novoCurso = cursoService.salvar(curso);
         return ResponseEntity.status(201).body(novoCurso);
     }
@@ -49,8 +49,6 @@ public class CursoController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
                     @ApiResponse(responseCode = "404", description = "Curso não encontrado",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-                    @ApiResponse(responseCode = "400", description = "Campos inválidos ou mal formatados",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PatchMapping("/desabilitar-curso/{id}")
     public ResponseEntity<Curso> inabilitarCurso(@PathVariable Long id) {
@@ -61,12 +59,14 @@ public class CursoController {
     @Operation(summary = "Alterar professor", description = "Funcionalidade de alterar o professor do curso",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Professor atualizado com sucesso",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Void.class))),
+                            content = @Content(mediaType = "application/json", schema = @Schema())),
                     @ApiResponse(responseCode = "404", description = "Curso não encontrado",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
+                    @ApiResponse(responseCode = "400", description = "Recurso não processado por dados de entrada inválidos",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PatchMapping("/{id}")
-    public ResponseEntity<ProfessorCursoDto> alterarProfessor(@PathVariable Long id , @RequestBody ProfessorCursoDto dto) {
+    public ResponseEntity<ProfessorCursoDto> alterarProfessor(@PathVariable Long id , @RequestBody @Valid ProfessorCursoDto dto) {
         cursoService.mudarProfessor(id , ProfessorCursoMapper.toCurso(dto));
         return ResponseEntity.status(200).build();
     }
