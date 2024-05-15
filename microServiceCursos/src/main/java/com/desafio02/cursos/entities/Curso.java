@@ -1,8 +1,9 @@
 package com.desafio02.cursos.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
 import java.io.Serializable;
 
 @Getter @Setter
@@ -17,12 +18,16 @@ public class Curso implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome", unique = true)
+    @NotBlank (message = "Nome é obrigatório")
+    @NonNull
+    @Column(name = "nome", unique = true, nullable = false)
     private String nome;
 
+    @NotNull
     @Column(name = "quantidade_horas")
     private int quantidadeHoras;
 
+    @NotBlank (message = "Nome do Professor é obrigatório")
     @Column(name = "professor")
     private String professor;
 
@@ -30,8 +35,12 @@ public class Curso implements Serializable {
     @Enumerated(EnumType.STRING)
     private AreaDoConhecimento areaConhecimento;
 
+    @NotNull
     @Column(name = "ativo")
     private boolean ativo;
+
+    @Column(name = "total_alunos")
+    private Integer totalAlunos;
 
     public enum AreaDoConhecimento {
         INFORMATICA,
@@ -52,7 +61,6 @@ public class Curso implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Curso curso = (Curso) o;
         return id.equals(curso.id);
     }

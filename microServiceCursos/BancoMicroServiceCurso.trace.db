@@ -1,0 +1,6 @@
+2024-05-13 21:02:24.803669-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]TB_CURSO"; expected "TRUNCATE"; SQL statement:
+TB_CURSO [42001-224]
+2024-05-13 21:02:31.330294-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]TB_CURSO"; expected "TRUNCATE"; SQL statement:
+TB_CURSO [42001-224]
