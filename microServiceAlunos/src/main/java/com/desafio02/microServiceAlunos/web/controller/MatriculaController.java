@@ -53,14 +53,8 @@ public class MatriculaController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Matricula.class))),
                     @ApiResponse(responseCode = "404", description = "Aluno não encontrado",
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-                    @ApiResponse(responseCode = "400", description = "O aluno não está ativo e não pode se matrícular.",
+                    @ApiResponse(responseCode = "400", description = "\"O curso não está ativo.\" ou \"O aluno não está ativo.\" ou \"O aluno já está matriculado neste curso\"",
                             content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-                    @ApiResponse(responseCode = "400", description = "O curso não está ativo e o aluno não pode ser matriculado.",
-                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-                    @ApiResponse(responseCode = "400", description = "Não pode haver mais de dez alunos matriculados.",
-                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
-                    @ApiResponse(responseCode = "422", description = "Matrícula inválida, por dados iválidos.",
-                            content= @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PostMapping
     public ResponseEntity<Matricula> matricularAluno(@RequestBody @Valid MatriculaDto matriculaDto) {

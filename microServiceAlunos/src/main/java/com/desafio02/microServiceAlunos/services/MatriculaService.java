@@ -44,6 +44,9 @@ public class MatriculaService {
             if (!aluno.isAtivo()) {
                 throw new UnableException("O aluno não está ativo.");
             }
+            if (matriculaRepository.existsByIdAlunoAndIdCurso(matriculaDto.getIdAluno(), matriculaDto.getIdCurso())) {
+                throw new UnableException("O aluno já está matriculado neste curso");
+            }
         Matricula matricula = new Matricula();
         matricula.setIdCurso(curso.getId());
         matricula.setIdAluno(aluno.getId());
