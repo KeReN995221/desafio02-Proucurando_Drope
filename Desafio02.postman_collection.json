@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "87d80c3e-2ffa-41d8-bc95-1dad57d7fa02",
 		"name": "Desafio02",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "34529915",
 		"_collection_link": "https://curso5.postman.co/workspace/curso-Workspace~236afd28-8476-4b52-85bc-af299e24e7a0/collection/34529915-87d80c3e-2ffa-41d8-bc95-1dad57d7fa02?action=share&source=collection_link&creator=34529915"
 	},
@@ -24,22 +24,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://127.0.0.1:8090/api/v1/cursos",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8090",
-							"path": [
-								"api",
-								"v1",
-								"cursos"
-							]
-						}
+						"url": "http://127.0.0.1:8090/api/v1/cursos"
 					},
 					"response": []
 				},
@@ -48,23 +33,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8090/api/v1/cursos/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8090",
-							"path": [
-								"api",
-								"v1",
-								"cursos",
-								"1"
-							]
-						}
+						"url": "http://127.0.0.1:8090/api/v1/cursos/1"
 					},
 					"response": []
 				},
@@ -73,22 +42,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8090/api/v1/cursos",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8090",
-							"path": [
-								"api",
-								"v1",
-								"cursos"
-							]
-						}
+						"url": "http://127.0.0.1:8090/api/v1/cursos"
 					},
 					"response": []
 				},
@@ -106,23 +60,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://127.0.0.1:8090/api/v1/cursos/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8090",
-							"path": [
-								"api",
-								"v1",
-								"cursos",
-								"1"
-							]
-						}
+						"url": "http://127.0.0.1:8090/api/v1/cursos/1"
 					},
 					"response": []
 				},
@@ -140,24 +78,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://127.0.0.1:8090/api/v1/cursos/desabilitar-curso/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8090",
-							"path": [
-								"api",
-								"v1",
-								"cursos",
-								"desabilitar-curso",
-								"1"
-							]
-						}
+						"url": "http://127.0.0.1:8090/api/v1/cursos/desabilitar-curso/1"
 					},
 					"response": []
 				}
@@ -183,22 +104,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "http://127.0.0.1:8080/api/v1/matriculas",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"matriculas"
-									]
-								}
+								"url": "http://127.0.0.1:8080/api/v1/matriculas"
 							},
 							"response": []
 						},
@@ -207,23 +113,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": "http://127.0.0.1:8080/api/v1/matriculas/3",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"matriculas",
-										"3"
-									]
-								}
+								"url": "http://127.0.0.1:8080/api/v1/matriculas/3"
 							},
 							"response": []
 						},
@@ -232,24 +122,7 @@
 							"request": {
 								"method": "PATCH",
 								"header": [],
-								"url": {
-									"raw": "http://127.0.0.1:8080/api/v1/matriculas/inativar-matricula/6",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"matriculas",
-										"inativar-matricula",
-										"6"
-									]
-								}
+								"url": "http://127.0.0.1:8080/api/v1/matriculas/inativar-matricula/6"
 							},
 							"response": []
 						},
@@ -258,9 +131,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": ""
-								}
+								"url": ""
 							},
 							"response": []
 						}
@@ -283,22 +154,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "http://127.0.0.1:8080/api/v1/alunos",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"alunos"
-									]
-								}
+								"url": "http://127.0.0.1:8080/api/v1/alunos"
 							},
 							"response": []
 						},
@@ -307,23 +163,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": "http://127.0.0.1:8080/api/v1/alunos/1",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"alunos",
-										"1"
-									]
-								}
+								"url": "http://127.0.0.1:8080/api/v1/alunos/1"
 							},
 							"response": []
 						},
@@ -332,22 +172,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": "http://127.0.0.1:8080/api/v1/alunos",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"alunos"
-									]
-								}
+								"url": "http://127.0.0.1:8080/api/v1/alunos"
 							},
 							"response": []
 						},
@@ -356,24 +181,7 @@
 							"request": {
 								"method": "PATCH",
 								"header": [],
-								"url": {
-									"raw": "http://127.0.0.1:8080/api/v1/alunos/inativar-aluno/1",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"alunos",
-										"inativar-aluno",
-										"1"
-									]
-								}
+								"url": "http://127.0.0.1:8080/api/v1/alunos/inativar-aluno/1"
 							},
 							"response": []
 						}
